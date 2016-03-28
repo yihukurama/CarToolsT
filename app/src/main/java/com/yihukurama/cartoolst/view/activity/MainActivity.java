@@ -38,7 +38,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 mGestureDetector.onTouchEvent(event);
                 // 一定要返回true，不然获取不到完整的事件
                 return true;
-            }});
+            }
+        });
         menuWindow = new SelectPicPopupWindow(MainActivity.this,this);
         initSlidMenu();
 
@@ -50,12 +51,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void initSlidMenu(){
         SlidingMenu menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT_RIGHT);
-        menu.toggle();
+//        menu.toggle();
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
         menu.setShadowWidthRes(R.dimen.shadow_width);
 //        menu.setShadowDrawable(R.drawable.octocat);
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu.setFadeEnabled(true);
         menu.setFadeDegree(0.35f);
+        menu.setBehindScrollScale((float) 0.5);
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         menu.setMenu(R.layout.slidmenu_layout_left);
         menu.setSecondaryMenu(R.layout.slidmenu_layout_left);
@@ -100,7 +103,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         @Override
         public boolean onSingleTapUp(MotionEvent e) {
             Log.i(getClass().getName(), "onSingleTapUp-----" + getActionName(e.getAction()));
-            menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.mainview), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
+
             return false;
         }
 
@@ -115,6 +118,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Log.i(getClass().getName(),
                     "onScroll-----" + getActionName(e2.getAction()) + ",(" + e1.getX() + "," + e1.getY() + ") ,("
                             + e2.getX() + "," + e2.getY() + ")");
+            menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.mainview), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
             return false;
         }
 
