@@ -38,7 +38,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void initView(){
-        image1 = (ImageView)findViewById(R.id.imageView);
+        image1 = (ImageView)findViewById(R.id.imagemokuai);
         image2 = (ImageView)findViewById(R.id.imageView2);
         initSlidMenu();
 

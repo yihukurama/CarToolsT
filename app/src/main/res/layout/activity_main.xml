@@ -6,43 +6,82 @@
     android:id="@+id/mainview"
     tools:context="com.yihukurama.cartoolst.view.activity.MainActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:background="@drawable/bb"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView"
-        android:visibility="gone"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:background="@drawable/soft"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="80dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
-
-    <LinearLayout
-        android:layout_below="@+id/imageView"
+    <RelativeLayout
         android:orientation="horizontal"
+        android:id="@+id/ralative"
+        android:layout_width="1920px"
+        android:layout_height="720px"
+        android:background="@color/color0D152B"
+        android:layout_centerInParent="true">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imagemokuai"
+            android:background="@drawable/mokuai"
+            android:layout_centerInParent="true"/>
+
+        <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+        android:id="@+id/imageleft"
+        android:background="@drawable/bianyuanbutton"
+        android:layout_marginLeft="10px"
+        android:layout_centerVertical="true" />
 
-        <ListView
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/imageright"
+            android:background="@drawable/bianyuanbutton"
+            android:layout_marginRight="10px"/>
 
-        </ListView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:background="@drawable/jiahao"
+            android:layout_marginEnd="237dp"
+            android:layout_marginTop="122dp"
+            android:layout_below="@+id/imageleft"
+            android:layout_toStartOf="@+id/imageView2" />
 
-    </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/jianhao"
+            android:id="@+id/button2"
+            android:layout_alignTop="@+id/button"
+            android:layout_toStartOf="@+id/button"
+            android:layout_marginEnd="148dp" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fengli"
+            android:id="@+id/imageView"
+            android:layout_marginBottom="105dp"
+            android:layout_marginEnd="322dp"
+            android:layout_above="@+id/imageright"
+            android:layout_alignEnd="@+id/imagemokuai" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:background="@drawable/fengxiangall"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+
+    </ListView>
 </RelativeLayout>
