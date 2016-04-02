@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/imagemokuai"
             android:background="@drawable/mokuai"
-            android:layout_centerInParent="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true" />
 
         <ImageView
         android:layout_width="wrap_content"
@@ -35,53 +36,133 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageright"
             android:background="@drawable/bianyuanbutton"
-            android:layout_marginRight="10px"/>
+            android:layout_marginRight="10px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button"
-            android:background="@drawable/jiahao"
-            android:layout_marginEnd="237dp"
-            android:layout_marginTop="122dp"
-            android:layout_below="@+id/imageleft"
-            android:layout_toStartOf="@+id/imageView2" />
+            android:background="@drawable/jiajian"
+            android:layout_alignBottom="@+id/imagemokuai"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="100px" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/jianhao"
+            android:background="@drawable/jiajian"
             android:id="@+id/button2"
             android:layout_alignTop="@+id/button"
-            android:layout_toStartOf="@+id/button"
-            android:layout_marginEnd="148dp" />
+            android:layout_alignStart="@+id/imagemokuai"
+            android:layout_marginStart="155dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/fengli"
             android:id="@+id/imageView"
-            android:layout_marginBottom="105dp"
-            android:layout_marginEnd="322dp"
-            android:layout_above="@+id/imageright"
-            android:layout_alignEnd="@+id/imagemokuai" />
+            android:layout_above="@+id/fengxiang"
+            android:layout_alignStart="@+id/button" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView2"
             android:background="@drawable/fengxiangall"
-            android:layout_alignTop="@+id/imageView"
+            android:layout_above="@+id/imageright"
+            android:layout_alignStart="@+id/button3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fengliang"
+            android:text="风量"
+            style="@style/P36a_2"
+            android:layout_alignTop="@+id/fengxiang"
+            android:layout_alignEnd="@+id/imageView" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fengxiang"
+            style="@style/P36a_2"
+            android:text="风向"
+            android:layout_below="@+id/imageView2"
+            android:layout_alignStart="@+id/imageView2"
+            android:layout_marginTop="24px" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wendu"
+            android:text="温度"
+            style="@style/P36a_2"
+            android:layout_below="@+id/imageleft"
+            android:layout_alignStart="@+id/button2" />
+
+        <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/kongtiao"
+            android:text="空调"
+            style="@style/P42A"
+            android:layout_above="@+id/imageView2"
+            android:layout_alignStart="@+id/textView"
+            android:layout_marginBottom="73dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button3"
+            android:background="@drawable/jiajian"
+            android:layout_alignTop="@+id/button"
+            android:layout_alignEnd="@+id/imagemokuai"
+            android:layout_marginEnd="110dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:text="24"
+            style="@style/B100B"
+            android:layout_alignTop="@+id/imageView2"
+            android:layout_alignStart="@+id/wendu" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/du"
+            android:id="@+id/imageView3"
+            android:layout_alignTop="@+id/textView4"
+            android:layout_toEndOf="@+id/textView" />
+
+        <TextView
+            style="@style/B100B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:text="1"
+            android:layout_above="@+id/fengliang"
             android:layout_centerHorizontal="true" />
 
+        <TextView
+            style="@style/B66B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:text="/5"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_toEndOf="@+id/textView2" />
+
+        <TextView
+            style="@style/B66B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:text="C"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView3" />
 
     </RelativeLayout>
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-
-
-    </ListView>
 </RelativeLayout>
