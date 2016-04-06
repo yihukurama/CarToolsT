@@ -36,12 +36,12 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rbutton5"
+            android:id="@+id/menumusic"
             android:background="@drawable/duomeitiselector"/>
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rbutton6"
+            android:id="@+id/menushushi"
             android:background="@drawable/shezhiselector"/>
 
 

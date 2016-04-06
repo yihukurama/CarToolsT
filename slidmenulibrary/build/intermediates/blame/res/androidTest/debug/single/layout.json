@@ -1,10 +1,14 @@
 [
     {
-        "merged": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
-        "source": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
+        "merged": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
+        "source": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
     },
     {
-        "merged": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/slidmenulibrary/build/intermediates/res/merged/androidTest/debug/layout/slidingmenumain.xml",
-        "source": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/slidmenulibrary/build/intermediates/bundles/debug/res/layout/slidingmenumain.xml"
+        "merged": "H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
+        "source": "H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
+    },
+    {
+        "merged": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
+        "source": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
     }
 ]

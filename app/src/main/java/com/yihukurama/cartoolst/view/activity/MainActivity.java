@@ -16,11 +16,14 @@ import com.yihukurama.cartoolst.R;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
 import com.yihukurama.cartoolst.model.UriSet;
 import com.yihukurama.cartoolst.view.fragment.CallFragment;
+import com.yihukurama.cartoolst.view.fragment.DaohanFragment;
+import com.yihukurama.cartoolst.view.fragment.DiantaiFragment;
 import com.yihukurama.cartoolst.view.fragment.MusicFragment;
 import com.yihukurama.cartoolst.view.fragment.ShushiFragment;
 
 public class MainActivity extends AppCompatActivity implements CallFragment.OnFragmentInteractionListener,
-        MusicFragment.OnFragmentInteractionListener,ShushiFragment.OnFragmentInteractionListener,View.OnClickListener {
+        MusicFragment.OnFragmentInteractionListener,ShushiFragment.OnFragmentInteractionListener,
+        DaohanFragment.OnFragmentInteractionListener,DiantaiFragment.OnFragmentInteractionListener,View.OnClickListener {
     //手指按下的点为(x1, y1)手指离开屏幕的点为(x2, y2)
     float x1 = 0;
     float x2 = 0;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private CallFragment callFragment;
     private MusicFragment musicFragment;
     private ShushiFragment shushiFragment;
+    private DaohanFragment daohanFragment;
+    private DiantaiFragment diantaiFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +81,38 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         menu.setMenu(R.layout.slidmenu_left);
         menu.setSecondaryMenu(R.layout.slidemenu_right);
+        menu.setOnClickListener(this);
+        ImageButton menumusic = (ImageButton)menu.findViewById(R.id.menumusic);
+        ImageButton menushushi = (ImageButton)menu.findViewById(R.id.menushushi);
+        ImageButton menudaohang = (ImageButton)menu.findViewById(R.id.rbutton1);
+        ImageButton menudiantai = (ImageButton)menu.findViewById(R.id.rbutton2);
+        ImageButton menucall = (ImageButton)menu.findViewById(R.id.rbutton4);
+        menu.addIgnoredView(menushushi);
+        menu.addIgnoredView(menumusic);
+        menu.addIgnoredView(menudaohang);
+        menu.addIgnoredView(menudiantai);
+        menu.addIgnoredView(menucall);
+        menumusic.setOnClickListener(this);
+        menushushi.setOnClickListener(this);
+        menudaohang.setOnClickListener(this);
+        menudiantai.setOnClickListener(this);
+        menucall.setOnClickListener(this);
 
+        menumusic = (ImageButton)menu.getSecondaryMenu().findViewById(R.id.menumusic);
+        menushushi = (ImageButton)menu.getSecondaryMenu().findViewById(R.id.menushushi);
+        menudaohang = (ImageButton)menu.getSecondaryMenu().findViewById(R.id.rbutton1);
+        menudiantai = (ImageButton)menu.getSecondaryMenu().findViewById(R.id.rbutton2);
+        menucall = (ImageButton)menu.getSecondaryMenu().findViewById(R.id.rbutton4);
+        menu.addIgnoredView(menushushi);
+        menu.addIgnoredView(menumusic);
+        menu.addIgnoredView(menudaohang);
+        menu.addIgnoredView(menudiantai);
+        menu.addIgnoredView(menucall);
+        menumusic.setOnClickListener(this);
+        menushushi.setOnClickListener(this);
+        menudaohang.setOnClickListener(this);
+        menudiantai.setOnClickListener(this);
+        menucall.setOnClickListener(this);
     }
 
 
@@ -85,6 +121,61 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     @Override
     public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.menumusic:
+                    menu.toggle();
+                    transaction = fm.beginTransaction();
+                    if (musicFragment == null)
+                    {
+                        musicFragment = new MusicFragment();
+                    }
+                    // 使用当前Fragment的布局替代id_content的控件
+                    transaction.replace(R.id.showingfragment, musicFragment);
+                    transaction.commit();
+                    break;
+                case R.id.menushushi:
+                    menu.toggle();
+                    transaction = fm.beginTransaction();
+                    if (shushiFragment == null)
+                    {
+                        shushiFragment = new ShushiFragment();
+                    }
+                    // 使用当前Fragment的布局替代id_content的控件
+                    transaction.replace(R.id.showingfragment, shushiFragment);
+                    transaction.commit();
+                    break;
+                case R.id.rbutton1:
+                    menu.toggle();
+                    transaction = fm.beginTransaction();
+                    if (daohanFragment == null)
+                    {
+                        daohanFragment = new DaohanFragment();
+                    }
+                    // 使用当前Fragment的布局替代id_content的控件
+                    transaction.replace(R.id.showingfragment, daohanFragment);
+                    transaction.commit();
+                    break;
+                case R.id.rbutton2:
+                    menu.toggle();
+                    transaction = fm.beginTransaction();
+                    if (diantaiFragment == null)
+                    {
+                        diantaiFragment = new DiantaiFragment();
+                    }
+                    // 使用当前Fragment的布局替代id_content的控件
+                    transaction.replace(R.id.showingfragment, diantaiFragment);
+                    transaction.commit();
+                    break;
+                case R.id.rbutton4:
+                    menu.toggle();
+                    transaction = fm.beginTransaction();
+                    if (callFragment == null)
+                    {
+                        callFragment = new CallFragment();
+                    }
+                    // 使用当前Fragment的布局替代id_content的控件
+                    transaction.replace(R.id.showingfragment, callFragment);
+                    transaction.commit();
+                    break;
                 default:
                     break;
             }

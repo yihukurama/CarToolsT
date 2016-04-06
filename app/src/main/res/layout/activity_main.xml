@@ -34,30 +34,88 @@
             android:id="@+id/showingfragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30px"
-            android:layout_centerVertical="true"/>
+            android:layout_marginLeft="40px"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="20px">
+            android:layout_marginEnd="66px"
+            android:layout_toStartOf="@+id/imageright"
+            android:layout_marginTop="40px">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="音乐"
-                android:textSize="42px" />
+                android:text="10:08"
+                style="@style/C60b" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="18px">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12/25"
+                    style="@style/C24b" />
+                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24px"
+                    android:text="星期五"
+                    style="@style/P24a" />
+
+            </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="歌曲名"
-                android:textSize="42px" />
-            <TextView
+                android:layout_marginTop="68px"
+                android:text="广州"
+                style="@style/C24b"/>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="作者"
-                android:textSize="42px" />
+                android:orientation="horizontal"
+                android:gravity="center">
+                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18 "
+                    style="@style/P36a"/>
+                <ImageView
+                    android:layout_width="30px"
+                    android:layout_height="30px"
+                    android:background="@drawable/du"/>
+                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 晴"
+                    style="@style/P36a"/>
+            </LinearLayout>
+
+            <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34px"
+                android:text="车内"
+                style="@style/P24a" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24 "
+                    style="@style/C36b"/>
+
+                <ImageView
+                    android:layout_width="30px"
+                    android:layout_height="30px"
+                    android:background="@drawable/du"/>
+            </LinearLayout>
 
         </LinearLayout>
 
