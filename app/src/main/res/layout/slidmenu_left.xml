@@ -12,37 +12,37 @@
         android:orientation="vertical"
         android:layout_centerVertical="true">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbutton1"
-        android:background="@drawable/daohang"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbutton1"
+            android:background="@drawable/daohangselector"/>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbutton2"
-        android:background="@drawable/daohang"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbutton2"
+            android:background="@drawable/diantaiselector"/>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbutton3"
-        android:background="@drawable/daohang"/>
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbutton4"
-        android:background="@drawable/daohang"/>
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbutton5"
-        android:background="@drawable/daohang"/>
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbutton6"
-        android:background="@drawable/daohang"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbutton3"
+            android:background="@drawable/cheliangfuwuselector"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbutton4"
+            android:background="@drawable/tongxunselector"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbutton5"
+            android:background="@drawable/duomeitiselector"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbutton6"
+            android:background="@drawable/shezhiselector"/>
     </LinearLayout>
 </RelativeLayout>
