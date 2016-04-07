@@ -8,9 +8,9 @@ import java.io.Serializable;
 public class MusicBean implements Serializable {
     private String name = "";
     private String singer ="";
-    private String maxTime ="";
-    private String currentTime ="";
-    private int max=0;
+    private String maxTime ="00:00";
+    private String currentTime ="00:00";
+    private int max=100;
     private int progress=0;
 
 

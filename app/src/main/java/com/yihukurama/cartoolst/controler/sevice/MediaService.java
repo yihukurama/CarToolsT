@@ -93,6 +93,9 @@ public class MediaService extends Service {
         if (mp.isPlaying()){
             CartoolApp.setMusicStatus(ConstantValue.PAUSE);
             mp.pause();
+            //发送广播停止动画
+            Intent intents = new Intent("com.yihukurama.stopanimation");
+            sendBroadcast(intents);
         }else{
             CartoolApp.setMusicStatus(ConstantValue.PLAY);
             mp.start();

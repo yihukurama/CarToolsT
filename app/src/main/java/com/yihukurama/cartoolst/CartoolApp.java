@@ -1,5 +1,6 @@
 package com.yihukurama.cartoolst;
 
+import android.animation.ObjectAnimator;
 import android.app.Application;
 
 import com.yihukurama.cartoolst.model.ConstantValue;
@@ -13,6 +14,7 @@ public class CartoolApp extends Application {
     public static MusicBean musicBean = new MusicBean();
     static String musicStatus = ConstantValue.STOP;
     static String mediaStatus = ConstantValue.STOP;
+    public static ObjectAnimator cdAnimation = null;
     @Override
     public void onCreate() {
         super.onCreate();

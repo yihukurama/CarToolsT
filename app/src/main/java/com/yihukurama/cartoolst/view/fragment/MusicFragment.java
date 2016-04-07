@@ -12,12 +12,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
+import com.yihukurama.cartoolst.controler.AnimationManager;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
 import com.yihukurama.cartoolst.model.ConstantValue;
 import com.yihukurama.cartoolst.model.MusicBean;
@@ -70,6 +73,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     ImageButton pauseBtn;
     SeekBar seekBar;
     TextView textView;
+    ImageView cdView;
+    Animation cdAnimation;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,13 +97,13 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     private void initData() {
         activity = getActivity();
         regesitBC();
-        seekBar.setProgress(CartoolApp.musicBean.getProgress());
-        seekBar.setMax(CartoolApp.musicBean.getMax());
-        textView.setText(CartoolApp.musicBean.getCurrentTime() + "/" + CartoolApp.musicBean.getMaxTime());
-        if(CartoolApp.getMusicStatus().equals(ConstantValue.PLAY)){
-            playBtn.setVisibility(View.GONE);
-            pauseBtn.setVisibility(View.VISIBLE);
-        }
+//        seekBar.setProgress(CartoolApp.musicBean.getProgress());
+//        seekBar.setMax(CartoolApp.musicBean.getMax());
+//        textView.setText(CartoolApp.musicBean.getCurrentTime() + "/" + CartoolApp.musicBean.getMaxTime());
+//        if(CartoolApp.getMusicStatus().equals(ConstantValue.PLAY)){
+//            playBtn.setVisibility(View.GONE);
+//            pauseBtn.setVisibility(View.VISIBLE);
+//        }
     }
 
     private void initView(View view){
@@ -109,6 +114,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         pauseBtn.setOnClickListener(this);
         seekBar = (SeekBar)view.findViewById(R.id.seekBar);
         textView = (TextView)view.findViewById(R.id.time);
+        cdView = (ImageView)view.findViewById(R.id.cd);
+
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -165,6 +172,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         msgReceiver = new MsgReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.yihukurama.updatemusicpro");
+        intentFilter.addAction("com.yihukurama.stopanimation");
         activity.registerReceiver(msgReceiver, intentFilter);
 
     }
@@ -177,12 +185,34 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         public class MsgReceiver extends BroadcastReceiver {
             @Override
             public void onReceive(Context context, Intent intent) {
-            //拿到进度，更新UI
-                Log.i("debug", "收到广播");
-                MusicBean musicBean = (MusicBean)intent.getSerializableExtra("music");
-                seekBar.setProgress(musicBean.getProgress());
-                seekBar.setMax(musicBean.getMax());
-                textView.setText(musicBean.getCurrentTime()+"/"+musicBean.getMaxTime());
+                switch ( intent.getAction() ){
+                    case "com.yihukurama.updatemusicpro":
+                        //拿到进度，更新UI
+                        Log.i("debug", "收到广播");
+                        MusicBean musicBean = (MusicBean)intent.getSerializableExtra("music");
+                        seekBar.setProgress(musicBean.getProgress());
+                        seekBar.setMax(musicBean.getMax());
+                        textView.setText(musicBean.getCurrentTime() + "/" + musicBean.getMaxTime());
+
+                        if (CartoolApp.cdAnimation == null){
+                            CartoolApp.cdAnimation = AnimationManager.rotateSelf(cdView,40000);
+                            CartoolApp.cdAnimation.start();
+                        }else if (CartoolApp.cdAnimation.isPaused()){
+                            CartoolApp.cdAnimation = AnimationManager.rotateSelf(cdView,40000);
+                            CartoolApp.cdAnimation.resume();
+                        }else if(!CartoolApp.cdAnimation.isStarted()){
+                            CartoolApp.cdAnimation = AnimationManager.rotateSelf(cdView,40000);
+                            CartoolApp.cdAnimation.resume();
+                        }
+                        break;
+                    case "com.yihukurama.stopanimation":
+                        CartoolApp.cdAnimation.pause();
+                        break;
+
+                }
+
+
+
             }
 
         }

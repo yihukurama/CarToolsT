@@ -1,15 +1,22 @@
 package com.yihukurama.cartoolst.controler;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
+
+import com.yihukurama.cartoolst.R;
 
 /**
  * Created by Administrator on 2016/3/30 0030.
  */
-public class AnimationUtils {
-    private static final String TAG = AnimationUtils.class.getSimpleName();
+public class AnimationManager {
+    private static final String TAG = AnimationManager.class.getSimpleName();
 
     /**
      * 从控件所在位置移动到控件的底部
@@ -110,5 +117,19 @@ public class AnimationUtils {
         return mShowAction;
 
     }
+
+    /**
+     * 旋转动画
+     */
+    public static ObjectAnimator rotateSelf(View view,long duration){
+        ObjectAnimator operatingAnim = ObjectAnimator.ofFloat(view, "rotation", 0, 360);
+
+        operatingAnim.setDuration(duration);
+        operatingAnim.setRepeatCount(5);
+        operatingAnim.setRepeatMode(ObjectAnimator.RESTART);
+        return operatingAnim;
+
+    }
+
 }
 

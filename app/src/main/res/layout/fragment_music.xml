@@ -5,139 +5,139 @@
     tools:context="com.yihukurama.www.fragmentapp.view.fragment.MusicFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:background="@drawable/mokuai"
         >
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="106dp"
-            android:layout_alignBottom="@+id/cd"
-            android:layout_alignParentStart="true"
-            android:id="@+id/linearLayout">
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignBottom="@+id/cd"
+            android:id="@+id/linearLayout2"
+            android:layout_marginTop="68px"
+            android:layout_marginLeft="76px"
             android:layout_alignParentStart="true">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical|left">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/lastselector"
-                    android:id="@+id/last" />
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/play"
-                    android:background="@drawable/bofangselector" />
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/pause"
-                    android:background="@drawable/pauseselector"
-                    android:visibility="gone"/>
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/next"
-                    android:background="@drawable/nextselector"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginLeft="100dp">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/yinliangselector"
-                    android:id="@+id/yinliang" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bofangmoshiselector"
-                    android:id="@+id/bofangmoshi" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/liebiaoselector"
-                    android:id="@+id/liebiao" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <SeekBar
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar"
-            android:layout_marginTop="50px"
-            android:max="100"
-            android:progress="1"/>
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20px"
-            android:textColor="#FFFF"/>
-    </LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/cd"
-                android:background="@drawable/cd"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/linearLayout"
-                android:layout_marginStart="222dp" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/cd"
-            android:layout_alignStart="@+id/linearLayout"
-            android:layout_marginTop="100px">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音乐"
-                android:textSize="42px" />
-            <TextView
+                style="@style/P42A" />
+            <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="California Dreamin'"
-                android:textSize="42px" />
+                android:layout_marginTop="42px"
+                style="@style/P36a"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="作者"
-                android:textSize="42px" />
+                android:layout_marginTop="40px"
+                android:text="The Mamas &amp; the Papas"
+                style="@style/P36a" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="94px"
+                android:id="@+id/linearLayout">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignBottom="@+id/cd"
+                android:layout_alignParentStart="true">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical|left">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/lastselector"
+                        android:id="@+id/last" />
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/play"
+                        android:background="@drawable/bofangselector" />
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pause"
+                        android:background="@drawable/pauseselector"
+                        android:visibility="gone"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/next"
+                        android:background="@drawable/nextselector"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="100dp">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/yinliangselector"
+                        android:id="@+id/yinliang" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bofangmoshiselector"
+                        android:id="@+id/bofangmoshi" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/liebiaoselector"
+                        android:id="@+id/liebiao" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <SeekBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="700px"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBar"
+                android:layout_marginTop="48px"
+                android:max="700"
+                android:progress="50"/>
+            <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
+                android:id="@+id/time"
+                android:text="00:00/00:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14px"
+                android:textColor="#FFFF"/>
         </LinearLayout>
 
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68px"
+            android:layout_marginLeft="196px"
+            android:id="@+id/cd"
+            android:background="@drawable/cd"
+            android:layout_centerVertical="true"/>
 
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </FrameLayout>
