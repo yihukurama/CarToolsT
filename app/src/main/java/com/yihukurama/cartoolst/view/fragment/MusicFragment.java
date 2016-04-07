@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.yihukurama.cartoolst.R;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
+import com.yihukurama.cartoolst.model.MusicBean;
 import com.yihukurama.cartoolst.model.UriSet;
 
 
@@ -153,8 +154,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         //动态注册广播接收器
         msgReceiver = new MsgReceiver();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.yihukurama.updateseekbar");
-        intentFilter.addAction("com.yihukurama.setseekbarmax");
+        intentFilter.addAction("com.yihukurama.updatemusicpro");
         activity.registerReceiver(msgReceiver, intentFilter);
 
     }
@@ -168,9 +168,10 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onReceive(Context context, Intent intent) {
             //拿到进度，更新UI
-            int progress = intent.getIntExtra("progress", 0);
-            int max = intent.getIntExtra("max",0);
-
+                MusicBean musicBean = (MusicBean)intent.getSerializableExtra("music");
+                seekBar.setProgress(musicBean.getProgress());
+                seekBar.setMax(musicBean.getMax());
+                textView.setText(musicBean.getCurrentTime()+"/"+musicBean.getMaxTime());
             }
 
         }

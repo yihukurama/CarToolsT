@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
+import com.yihukurama.cartoolst.controler.Utils;
 import com.yihukurama.cartoolst.model.ConstantValue;
 import com.yihukurama.cartoolst.model.MusicBean;
 
@@ -30,13 +31,7 @@ public class MediaService extends Service {
         musicBean.setProgress(0);
 
         Log.i("debug", "准备播放音乐");
-        //设置音乐总长度
-        maxSeekBar = mp.getDuration();
-        //发送Action为com.yihukurama.updateseekbar的广播
-        Intent intent = new Intent("com.yihukurama.setseekbarmax");
-        intent.putExtra("max", maxSeekBar);
-        sendBroadcast(intent);
-        nowSeekBar = 0;
+
         sendBCThread = new Thread(new Runnable() {
 
                     @Override
@@ -49,10 +44,8 @@ public class MediaService extends Service {
 
                             try {
                                 nowSeekBar = mp.getCurrentPosition();
-                                //发送Action为com.yihukurama.updateseekbar的广播
-                                Intent intent = new Intent("com.yihukurama.updateseekbar");
-                                intent.putExtra("progress", nowSeekBar);
-                                sendBroadcast(intent);
+                                musicBean.setProgress(nowSeekBar);
+                                updateMusicProgress();
                                 Thread.sleep(1000);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -62,10 +55,17 @@ public class MediaService extends Service {
                         }
                     }
                 });
-        if (!sendBCThread.isAlive())
-            sendBCThread.start();
     }
 
+    private void updateMusicProgress(){
+        String maxTime = Utils.traInt2Time(musicBean.getMax());
+        String proTime = Utils.traInt2Time(musicBean.getProgress());
+        musicBean.setMaxTime(maxTime);
+        musicBean.setCurrentTime(proTime);
+        Intent intent = new Intent("com.yihukurama.updatemusicpro");
+        intent.putExtra("music", musicBean);
+        sendBroadcast(intent);
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -84,6 +84,7 @@ public class MediaService extends Service {
         }else{
             CartoolApp.setMusicStatus(ConstantValue.PLAY);
             mp.start();
+            sendBCThread.start();
         }
 
 
