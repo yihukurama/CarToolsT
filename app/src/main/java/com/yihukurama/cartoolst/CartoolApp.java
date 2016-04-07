@@ -3,15 +3,16 @@ package com.yihukurama.cartoolst;
 import android.app.Application;
 
 import com.yihukurama.cartoolst.model.ConstantValue;
+import com.yihukurama.cartoolst.model.MusicBean;
 
 
 /**
  * Created by Administrator on 2016/4/3 0003.
  */
 public class CartoolApp extends Application {
-
-    static String musicStatus;
-    static String mediaStatus;
+    public static MusicBean musicBean = new MusicBean();
+    static String musicStatus = ConstantValue.STOP;
+    static String mediaStatus = ConstantValue.STOP;
     @Override
     public void onCreate() {
         super.onCreate();

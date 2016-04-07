@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
+import com.yihukurama.cartoolst.model.ConstantValue;
 import com.yihukurama.cartoolst.model.MusicBean;
 import com.yihukurama.cartoolst.model.UriSet;
 
@@ -89,6 +92,13 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     private void initData() {
         activity = getActivity();
         regesitBC();
+        seekBar.setProgress(CartoolApp.musicBean.getProgress());
+        seekBar.setMax(CartoolApp.musicBean.getMax());
+        textView.setText(CartoolApp.musicBean.getCurrentTime() + "/" + CartoolApp.musicBean.getMaxTime());
+        if(CartoolApp.getMusicStatus().equals(ConstantValue.PLAY)){
+            playBtn.setVisibility(View.GONE);
+            pauseBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initView(View view){
@@ -168,6 +178,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onReceive(Context context, Intent intent) {
             //拿到进度，更新UI
+                Log.i("debug", "收到广播");
                 MusicBean musicBean = (MusicBean)intent.getSerializableExtra("music");
                 seekBar.setProgress(musicBean.getProgress());
                 seekBar.setMax(musicBean.getMax());

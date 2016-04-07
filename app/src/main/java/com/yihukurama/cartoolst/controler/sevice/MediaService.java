@@ -31,21 +31,30 @@ public class MediaService extends Service {
         musicBean.setProgress(0);
 
         Log.i("debug", "准备播放音乐");
-
+        nowSeekBar = musicBean.getProgress();
+        maxSeekBar = musicBean.getMax();
         sendBCThread = new Thread(new Runnable() {
 
                     @Override
                     public void run() {
 
 
-                        while(nowSeekBar < maxSeekBar){
+                        while(nowSeekBar < maxSeekBar ){
 
-
-
-                            try {
+                            if(mp.isPlaying()){
                                 nowSeekBar = mp.getCurrentPosition();
                                 musicBean.setProgress(nowSeekBar);
+                                CartoolApp.musicBean = musicBean;
                                 updateMusicProgress();
+                            }else if(!mp.isPlaying() && CartoolApp.getMusicStatus().equals(ConstantValue.PLAY)){
+                                mp.start();
+                                nowSeekBar = 0;
+                                musicBean.setProgress(0);
+                                CartoolApp.musicBean = musicBean;
+                            }
+
+                            try {
+
                                 Thread.sleep(1000);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -55,6 +64,9 @@ public class MediaService extends Service {
                         }
                     }
                 });
+
+
+        sendBCThread.start();
     }
 
     private void updateMusicProgress(){
@@ -84,10 +96,9 @@ public class MediaService extends Service {
         }else{
             CartoolApp.setMusicStatus(ConstantValue.PLAY);
             mp.start();
-            sendBCThread.start();
         }
 
-
+        CartoolApp.musicBean = musicBean;
         return super.onStartCommand(intent, flags, startId);
     }
 

@@ -1,6 +1,8 @@
 package com.yihukurama.cartoolst.view.widget;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -27,7 +29,7 @@ public class PingFangFontTextView extends TextView {
 
     private void initFont(){
 //        AssetManager assertMgr = getContext().getAssets();
-//        Typeface font = Typeface.createFromAsset(assertMgr,"fonts/PingFang.ttc");
+//        Typeface font = Typeface.createFromAsset(assertMgr, "fonts/PingFang.ttc");
 //        setTypeface(font);
     }
 }

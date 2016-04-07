@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/slidmenulibrary/build/intermediates/res/merged/androidTest/debug/values/values.xml",
+        "outputFile": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 999
                 },
                 "from": {
-                    "file": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/slidmenulibrary/build/intermediates/bundles/debug/res/values/values.xml",
+                    "file": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -24,7 +24,7 @@
         ]
     },
     {
-        "outputFile": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "outputFile": "H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -35,7 +35,7 @@
                     "endOffset": 999
                 },
                 "from": {
-                    "file": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "file": "H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -48,7 +48,7 @@
         ]
     },
     {
-        "outputFile": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "outputFile": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -59,7 +59,7 @@
                     "endOffset": 999
                 },
                 "from": {
-                    "file": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "file": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -72,7 +72,7 @@
         ]
     },
     {
-        "outputFile": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "outputFile": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -83,7 +83,31 @@
                     "endOffset": 999
                 },
                 "from": {
-                    "file": "/Volumes/DATA01/Android/WorkSpace/CarToolsT/H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "file": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 961,
+                        "endColumn": 42,
+                        "endOffset": 999
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 961,
+                    "endColumn": 42,
+                    "endOffset": 999
+                },
+                "from": {
+                    "file": "H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\Volumes\\DATA01\\Android\\WorkSpace\\CarToolsT\\H:\\AndroidStudioWorkspace\\CarToolsT\\slidmenulibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,

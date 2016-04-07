@@ -6,12 +6,13 @@ import java.io.Serializable;
  * Created by Administrator on 2016/4/6 0006.
  */
 public class MusicBean implements Serializable {
-    private String name;
-    private String singer;
-    private String maxTime;
-    private String currentTime;
-    private int max;
-    private int progress;
+    private String name = "";
+    private String singer ="";
+    private String maxTime ="";
+    private String currentTime ="";
+    private int max=0;
+    private int progress=0;
+
 
     public String getName() {
         return name;
