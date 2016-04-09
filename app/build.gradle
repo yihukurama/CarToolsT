@@ -1,19 +1,32 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'dengshuai'
+            keyPassword '123456'
+            storeFile file('/Volumes/DATA01/Android/WorkSpace/CarToolsT/carToolsT.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "com.yihukurama.cartoolst"
         minSdkVersion 19
-        targetSdkVersion 17
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     productFlavors {
@@ -21,8 +34,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
     compile project(':slidmenulibrary')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
 }
