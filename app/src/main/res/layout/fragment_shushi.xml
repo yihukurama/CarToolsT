@@ -6,8 +6,8 @@
 
     <RelativeLayout
         android:id="@+id/ralative"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="1540px"
+        android:layout_height="640px"
         android:background="@drawable/mokuai"
         >
 
@@ -38,8 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="48px"
-                    android:layout_marginTop="74px"
+                    android:layout_marginTop="24px"
                     android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
@@ -62,7 +61,9 @@
                     android:id="@+id/wendu"
                     android:text="温度"
                     style="@style/P36a_2"
-                    android:layout_marginBottom="74px" />
+
+                    android:layout_marginTop="42px"
+                    android:layout_marginBottom="42px"/>
 
 
 

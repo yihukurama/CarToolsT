@@ -2,25 +2,32 @@ package com.yihukurama.cartoolst.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MapViewLayoutParams;
+import com.baidu.mapapi.map.Projection;
 import com.baidu.mapapi.map.SupportMapFragment;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.baidu.mapapi.model.LatLng;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.yihukurama.cartoolst.R;
+import com.yihukurama.cartoolst.controler.Utils;
 import com.yihukurama.cartoolst.controler.bluetooth.BluetoothCallBack;
 import com.yihukurama.cartoolst.controler.bluetooth.BluetoothManager;
 import com.yihukurama.cartoolst.controler.bluetooth.BluetoothService;
@@ -56,11 +63,6 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
     BluetoothManager bluetoothManager;
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +75,6 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         initView();
         initData();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void prepare() {
@@ -94,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     }
 
     private void initView() {
+        image1 = (ImageView)findViewById(R.id.imageleft);
         setDefaultFragment();
         initSlidMenu();
 
@@ -222,21 +222,24 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                     BaiduMapOptions bo = new BaiduMapOptions().mapStatus(ms).compassEnabled(false).zoomControlsEnabled(false);
 
                     daohanFragment = SupportMapFragment.newInstance(bo);
-                }
 
+                }
                 // 使用当前Fragment的布局替代id_content的控件
                 transaction.replace(R.id.showingfragment, daohanFragment);
                 transaction.commit();
+
+
                 break;
             case R.id.rbutton2:
                 menu.toggle();
-                transaction = fm.beginTransaction();
-                if (diantaiFragment == null) {
-                    diantaiFragment = new DiantaiFragment();
-                }
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.showingfragment, diantaiFragment);
-                transaction.commit();
+//                transaction = fm.beginTransaction();
+//                if (diantaiFragment == null) {
+//                    diantaiFragment = new DiantaiFragment();
+//                }
+//                // 使用当前Fragment的布局替代id_content的控件
+//                transaction.replace(R.id.showingfragment, diantaiFragment);
+//                transaction.commit();
+                initMap();
                 break;
             case R.id.rbutton4:
                 menu.toggle();
@@ -251,6 +254,15 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             default:
                 break;
         }
+
+
+    }
+
+    private void initMap() {
+
+        MapView mapView = daohanFragment.getMapView();
+
+        Utils.initBaiduMapWidget(this,mapView,this);
 
 
     }
