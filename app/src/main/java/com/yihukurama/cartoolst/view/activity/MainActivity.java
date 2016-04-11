@@ -2,35 +2,24 @@ package com.yihukurama.cartoolst.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MapViewLayoutParams;
-import com.baidu.mapapi.map.Projection;
 import com.baidu.mapapi.map.SupportMapFragment;
-import com.baidu.mapapi.model.LatLng;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.yihukurama.cartoolst.R;
 import com.yihukurama.cartoolst.controler.Utils;
-import com.yihukurama.cartoolst.controler.bluetooth.BluetoothCallBack;
-import com.yihukurama.cartoolst.controler.bluetooth.BluetoothManager;
-import com.yihukurama.cartoolst.controler.bluetooth.BluetoothService;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
 import com.yihukurama.cartoolst.model.UriSet;
 import com.yihukurama.cartoolst.view.fragment.CallFragment;
@@ -59,11 +48,6 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private ShushiFragment shushiFragment;
     private SupportMapFragment daohanFragment;
     private DiantaiFragment diantaiFragment;
-
-
-    BluetoothManager bluetoothManager;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
     private void prepare() {
         context = this;
-
         setDefaultFragment();
 
     }
@@ -87,9 +70,21 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private void setDefaultFragment() {
         fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        shushiFragment = new ShushiFragment();
-        transaction.replace(R.id.showingfragment, shushiFragment);
+
+        //overlook:俯视角；zoom：缩放
+        MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(15).build();
+        //compassEnabled是否开启指南针；zoomControlsEnabled：是否按比例缩放；
+        BaiduMapOptions bo = new BaiduMapOptions().mapStatus(ms).compassEnabled(false).zoomControlsEnabled(false);
+
+        daohanFragment = SupportMapFragment.newInstance(bo);
+
+        transaction.replace(R.id.showingfragment, daohanFragment);
         transaction.commit();
+
+        musicFragment = new MusicFragment();
+        shushiFragment = new ShushiFragment();
+        callFragment = new CallFragment();
+        diantaiFragment = new DiantaiFragment();
     }
 
     private void initView() {
@@ -100,54 +95,20 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     }
 
     private void initData() {
+        //开启播放音乐的service
+        Intent intentPlay = new Intent(context,MediaService.class);
+        intentPlay.putExtra("cmd", "");
+        startService(intentPlay);
 
-        initBluetooth();
+
     }
 
-    private void initBluetooth() {
-        bluetoothManager = BluetoothManager.getInstance(new BluetoothCallBack() {
-            @Override
-            public void onStateChange(int bluetoothState, String message) {
-                switch (bluetoothState) {
-                    //蓝牙不可用
-                    case BluetoothService.STATE_UNAVAILABLE:
-                        Toast.makeText(context, "蓝牙不可用", Toast.LENGTH_SHORT);
-                        break;
 
-                    //蓝牙未连接
-                    case BluetoothService.STATE_NONE:
-                        Toast.makeText(context, "蓝牙未连接", Toast.LENGTH_SHORT);
-                        break;
-
-                    //蓝牙空闲
-                    case BluetoothService.STATE_LISTEN:
-                        Toast.makeText(context, "蓝牙空闲", Toast.LENGTH_SHORT);
-                        break;
-
-                    //蓝牙正连接
-                    case BluetoothService.STATE_CONNECTING:
-                        Toast.makeText(context, "蓝牙正在连接", Toast.LENGTH_SHORT);
-                        break;
-
-                    //蓝牙已连接, 当如果连接上了，message就是蓝牙的名称
-                    case BluetoothService.STATE_CONNECTED:
-                        Toast.makeText(context, "蓝牙已连接", Toast.LENGTH_SHORT);
-                        break;
-                }
-            }
-
-            @Override
-            public void onResult(int requsetCode, String data) {
-                //回调结果在页面显示
-
-            }
-        });
-    }
 
     private void initSlidMenu() {
         menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT_RIGHT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         menu.setShadowWidthRes(R.dimen.shadow_width);
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         menu.setFadeDegree(0.35f);
@@ -288,6 +249,26 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 // 使用当前Fragment的布局替代id_content的控件
                 transaction.replace(R.id.showingfragment, callFragment);
                 transaction.commit();
+                break;
+            case UriSet.PLAYMUSIC:
+                Intent intentPlay = new Intent(context,MediaService.class);
+                intentPlay.putExtra("cmd", "play");
+                startService(intentPlay);
+                break;
+            case UriSet.PAUSEMUSIC:
+                Intent intentPause = new Intent(context,MediaService.class);
+                intentPause.putExtra("cmd","pause");
+                startService(intentPause);
+                break;
+            case UriSet.NEXTMUSIC:
+                Intent intentNext = new Intent(context,MediaService.class);
+                intentNext.putExtra("cmd","next");
+                startService(intentNext);
+                break;
+            case UriSet.LASTMUSIC:
+                Intent intentLast = new Intent(context,MediaService.class);
+                intentLast.putExtra("cmd","last");
+                startService(intentLast);
                 break;
         }
 

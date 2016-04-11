@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
 import com.yihukurama.cartoolst.controler.AnimationManager;
+import com.yihukurama.cartoolst.controler.broadcast.SendBroadCast;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
 import com.yihukurama.cartoolst.model.ConstantValue;
 import com.yihukurama.cartoolst.model.MusicBean;
@@ -69,12 +70,15 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         return fragment;
     }
 
+    TextView musicName;
+    TextView singer;
     ImageButton playBtn;
     ImageButton pauseBtn;
+    ImageButton nextBtn;
+    ImageButton lastBtn;
     SeekBar seekBar;
     TextView textView;
     ImageView cdView;
-    Animation cdAnimation;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,21 +101,22 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     private void initData() {
         activity = getActivity();
         regesitBC();
-//        seekBar.setProgress(CartoolApp.musicBean.getProgress());
-//        seekBar.setMax(CartoolApp.musicBean.getMax());
-//        textView.setText(CartoolApp.musicBean.getCurrentTime() + "/" + CartoolApp.musicBean.getMaxTime());
-//        if(CartoolApp.getMusicStatus().equals(ConstantValue.PLAY)){
-//            playBtn.setVisibility(View.GONE);
-//            pauseBtn.setVisibility(View.VISIBLE);
-//        }
+
+        resetUI();
+
     }
 
     private void initView(View view){
-        view.findViewById(R.id.cd).setOnClickListener(this);
         playBtn = (ImageButton)view.findViewById(R.id.play);
         playBtn.setOnClickListener(this);
         pauseBtn = (ImageButton)view.findViewById(R.id.pause);
         pauseBtn.setOnClickListener(this);
+        nextBtn = (ImageButton)view.findViewById(R.id.next);
+        nextBtn.setOnClickListener(this);
+        lastBtn = (ImageButton)view.findViewById(R.id.last);
+        lastBtn.setOnClickListener(this);
+        musicName = (TextView)view.findViewById(R.id.musicname);
+        singer = (TextView)view.findViewById(R.id.singer);
         seekBar = (SeekBar)view.findViewById(R.id.seekBar);
         textView = (TextView)view.findViewById(R.id.time);
         cdView = (ImageView)view.findViewById(R.id.cd);
@@ -144,24 +149,35 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Intent intent;
+        Uri uri;
         switch (v.getId()){
             case R.id.cd:
-                Uri uri = Uri.parse(UriSet.TRA2CALLF);
+                uri = Uri.parse(UriSet.TRA2CALLF);
                 mListener.onFragmentInteraction(uri);
                 break;
             case R.id.play:
                 playBtn.setVisibility(View.GONE);
                 pauseBtn.setVisibility(View.VISIBLE);
-                intent = new Intent(activity, MediaService.class);
-                activity.startService(intent);
+                uri = Uri.parse(UriSet.PLAYMUSIC);
+                mListener.onFragmentInteraction(uri);
                 break;
             case R.id.pause:
                 playBtn.setVisibility(View.VISIBLE);
                 pauseBtn.setVisibility(View.GONE);
-                intent = new Intent(activity, MediaService.class);
-                activity.startService(intent);
-
+                uri = Uri.parse(UriSet.PAUSEMUSIC);
+                mListener.onFragmentInteraction(uri);
+                break;
+            case R.id.next:
+                playBtn.setVisibility(View.GONE);
+                pauseBtn.setVisibility(View.VISIBLE);
+                uri = Uri.parse(UriSet.NEXTMUSIC);
+                mListener.onFragmentInteraction(uri);
+                break;
+            case R.id.last:
+                playBtn.setVisibility(View.GONE);
+                pauseBtn.setVisibility(View.VISIBLE);
+                uri = Uri.parse(UriSet.LASTMUSIC);
+                mListener.onFragmentInteraction(uri);
                 break;
         }
     }
@@ -171,8 +187,10 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         //动态注册广播接收器
         msgReceiver = new MsgReceiver();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.yihukurama.updatemusicpro");
-        intentFilter.addAction("com.yihukurama.stopanimation");
+        intentFilter.addAction(SendBroadCast.stopAnimation);
+        intentFilter.addAction(SendBroadCast.resetSeekBar);
+        intentFilter.addAction(SendBroadCast.resumeAnimation);
+        intentFilter.addAction(SendBroadCast.startAnimation);
         activity.registerReceiver(msgReceiver, intentFilter);
 
     }
@@ -186,7 +204,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onReceive(Context context, Intent intent) {
                 switch ( intent.getAction() ){
-                    case "com.yihukurama.updatemusicpro":
+                    case SendBroadCast.resetSeekBar:
                         //拿到进度，更新UI
                         Log.i("debug", "收到广播");
                         MusicBean musicBean = (MusicBean)intent.getSerializableExtra("music");
@@ -194,19 +212,24 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
                         seekBar.setMax(musicBean.getMax());
                         textView.setText(musicBean.getCurrentTime() + "/" + musicBean.getMaxTime());
 
-                        if (CartoolApp.cdAnimation == null){
-                            CartoolApp.cdAnimation = AnimationManager.rotateSelf(cdView,40000);
-                            CartoolApp.cdAnimation.start();
-                        }else if (CartoolApp.cdAnimation.isPaused()){
-                            CartoolApp.cdAnimation = AnimationManager.rotateSelf(cdView,40000);
-                            CartoolApp.cdAnimation.resume();
-                        }else if(!CartoolApp.cdAnimation.isStarted()){
-                            CartoolApp.cdAnimation = AnimationManager.rotateSelf(cdView,40000);
-                            CartoolApp.cdAnimation.resume();
-                        }
                         break;
-                    case "com.yihukurama.stopanimation":
+                    case SendBroadCast.stopAnimation:
+                        Log.i("debug", "暂停动画");
                         CartoolApp.cdAnimation.pause();
+                        break;
+                    case SendBroadCast.startAnimation:
+                        Log.i("debug", "开始执行动画");
+                        CartoolApp.cdAnimation.start();
+                        //更新cd，歌曲名和作者
+                        refreshUI();
+
+                        break;
+                    case SendBroadCast.resumeAnimation:
+
+
+                            Log.i("debug", "恢复动画");
+                            CartoolApp.cdAnimation.resume();
+
                         break;
 
                 }
@@ -216,6 +239,39 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
             }
 
         }
+
+    private void resetUI(){
+        MusicBean musicBean = CartoolApp.musicBeanList.get(CartoolApp.currentMusicIndex);
+        seekBar.setProgress(musicBean.getProgress());
+        seekBar.setMax(musicBean.getMax());
+        textView.setText(musicBean.getCurrentTime() + "/" + musicBean.getMaxTime());
+        if(CartoolApp.getMusicStatus().equals(ConstantValue.PLAY)){
+            playBtn.setVisibility(View.GONE);
+            pauseBtn.setVisibility(View.VISIBLE);
+        }
+        if (CartoolApp.cdAnimation == null){
+            CartoolApp.cdAnimation = AnimationManager.rotateSelf(cdView, 40000);
+            Log.i("debug", "初始化动画");
+        }
+
+        if (CartoolApp.getMusicStatus().equals(ConstantValue.PLAY)){
+            Log.i("debug", "重新开始动画");
+            CartoolApp.cdAnimation = AnimationManager.rotateSelf(cdView, 40000);
+            CartoolApp.cdAnimation.start();
+        }else if(CartoolApp.getMusicStatus().equals(ConstantValue.PAUSE)){
+            Log.i("debug", "结束动画");
+            CartoolApp.cdAnimation.end();
+        }
+        refreshUI();
+    }
+    private void refreshUI() {
+
+        MusicBean musicBean = CartoolApp.musicBeanList.get(CartoolApp.currentMusicIndex);
+        cdView.setImageResource(musicBean.getCdView());
+        musicName.setText(musicBean.getName());
+        singer.setText(musicBean.getSinger());
+
+    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -230,5 +286,12 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i("debug", "暂停动画onpause");
+        CartoolApp.cdAnimation.pause();
     }
 }
