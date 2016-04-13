@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center_vertical"
     tools:context=".view.activity.MainActivity">
 
@@ -12,7 +12,6 @@
         android:background="@color/color0D152B"
         android:layout_centerInParent="true"
         android:orientation="horizontal">
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +118,15 @@
                     android:layout_height="30px"
                     android:background="@drawable/du"/>
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/connect"
+                android:layout_marginTop="50px"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:text="连接手机请点我..."
+                android:textSize="32px"/>
         </LinearLayout>
 
     </RelativeLayout>

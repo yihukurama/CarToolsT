@@ -8,4 +8,5 @@ public class UriSet {
     public static final String PAUSEMUSIC = "PAUSEMUSIC";
     public static final String NEXTMUSIC = "NEXTMUSIC";
     public static final String LASTMUSIC ="LASTMUSIC" ;
+    public static final String DUOMEITI = "DUOMEITI";
 }

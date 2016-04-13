@@ -339,7 +339,8 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
         BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
                 .fromResource(R.drawable.weizhi);
 
-        MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, true, mCurrentMarker);
+        MyLocationConfiguration config = new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.FOLLOWING, true, mCurrentMarker);
 
         mBaiduMap.setMyLocationConfigeration(config);
 

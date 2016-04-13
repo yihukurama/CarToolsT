@@ -4,20 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.MapStatus;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.yihukurama.cartoolst.R;
+import com.yihukurama.cartoolst.controler.bluetooth.BluetoothCS;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
+import com.yihukurama.cartoolst.model.Command;
 import com.yihukurama.cartoolst.model.UriSet;
 import com.yihukurama.cartoolst.view.fragment.CallFragment;
 import com.yihukurama.cartoolst.view.fragment.DaohanFragment;
@@ -28,16 +34,14 @@ import com.yihukurama.cartoolst.view.fragment.ShushiFragment;
 public class MainActivity extends AppCompatActivity implements CallFragment.OnFragmentInteractionListener,
         MusicFragment.OnFragmentInteractionListener, ShushiFragment.OnFragmentInteractionListener,
         DaohanFragment.OnFragmentInteractionListener, DiantaiFragment.OnFragmentInteractionListener, View.OnClickListener {
-    //手指按下的点为(x1, y1)手指离开屏幕的点为(x2, y2)
-    float x1 = 0;
-    float x2 = 0;
-    float y1 = 0;
-    float y2 = 0;
+
+
+    final static String TAG = MainActivity.class.getSimpleName();
     ImageView image1;
     SlidingMenu menu;
-    ImageButton liButton1;
+    TextView connectTV;
     Context context;
-
+    BluetoothCS bcs;
     FragmentManager fm;
     FragmentTransaction transaction;
     private CallFragment callFragment;
@@ -45,6 +49,12 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private ShushiFragment shushiFragment;
     private DaohanFragment daohanFragment;
     private DiantaiFragment diantaiFragment;
+
+    ImageButton menumusic;
+    ImageButton menushushi;
+    ImageButton menudaohang;
+    ImageButton menudiantai;
+    ImageButton menucall ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
     private void initView() {
         image1 = (ImageView)findViewById(R.id.imageleft);
+        connectTV = (TextView)findViewById(R.id.connect);
+        connectTV.setOnClickListener(this);
         setDefaultFragment();
         initSlidMenu();
 
@@ -95,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         Intent intentPlay = new Intent(context,MediaService.class);
         intentPlay.putExtra("cmd", "");
         startService(intentPlay);
-
+        bcs = new BluetoothCS("C0:EE:FB:46:90:33",LinkDetectedHandler);
 
     }
 
@@ -112,11 +124,11 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         menu.setMenu(R.layout.slidmenu_left);
         menu.setSecondaryMenu(R.layout.slidemenu_right);
         menu.setOnClickListener(this);
-        ImageButton menumusic = (ImageButton) menu.findViewById(R.id.menumusic);
-        ImageButton menushushi = (ImageButton) menu.findViewById(R.id.menushushi);
-        ImageButton menudaohang = (ImageButton) menu.findViewById(R.id.rbutton1);
-        ImageButton menudiantai = (ImageButton) menu.findViewById(R.id.rbutton2);
-        ImageButton menucall = (ImageButton) menu.findViewById(R.id.rbutton4);
+        menumusic = (ImageButton) menu.findViewById(R.id.menumusic);
+        menushushi = (ImageButton) menu.findViewById(R.id.menushushi);
+        menudaohang = (ImageButton) menu.findViewById(R.id.rbutton1);
+        menudiantai = (ImageButton) menu.findViewById(R.id.rbutton2);
+        menucall = (ImageButton) menu.findViewById(R.id.rbutton4);
         menu.addIgnoredView(menushushi);
         menu.addIgnoredView(menumusic);
         menu.addIgnoredView(menudaohang);
@@ -207,8 +219,12 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 transaction.replace(R.id.showingfragment, callFragment);
                 transaction.commit();
                 break;
+            case R.id.connect://开启蓝牙服务端
+                bcs.startServer();
+                break;
             default:
                 break;
+
         }
 
 
@@ -259,6 +275,42 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     }
 
 
+    private Handler LinkDetectedHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
 
+            if(msg.what==1)//客户端
+            {
+                String mes = (String)msg.obj;
+                Log.i(TAG, "client" + mes);
+                connectTV.setText("手机信息：" + mes);
+                switch (mes){
+                    case Command.SKIPDUOMEITI:
+                        transaction = fm.beginTransaction();
+                        if (musicFragment == null) {
+                            musicFragment = new MusicFragment();
+                        }
+                        // 使用当前Fragment的布局替代id_content的控件
+                        transaction.replace(R.id.showingfragment, musicFragment);
+                        transaction.commit();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else//服务器端
+            {
+                String remes = (String)msg.obj;
+                Log.i(TAG, "server" + remes);
+                connectTV.setText("平板信息："+remes);
+
+
+
+
+
+            }
+        }
+
+    };
 
 }
