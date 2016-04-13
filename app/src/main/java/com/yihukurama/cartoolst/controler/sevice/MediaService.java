@@ -7,7 +7,6 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.yihukurama.cartoolst.CartoolApp;
-import com.yihukurama.cartoolst.R;
 import com.yihukurama.cartoolst.controler.Utils;
 import com.yihukurama.cartoolst.controler.broadcast.SendBroadCast;
 import com.yihukurama.cartoolst.model.ConstantValue;
@@ -53,9 +52,8 @@ public class MediaService extends Service {
                                 updateMusicProgress();
                             }else if(!mp.isPlaying() && CartoolApp.getMusicStatus().equals(ConstantValue.PLAY)){
 
-                                mp.start();
-                                nowSeekBar = 0;
-                                currentMusic.setProgress(0);
+                                startNextMusic();
+
                             }
 
                             try {

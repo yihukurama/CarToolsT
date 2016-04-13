@@ -8,17 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
-
-
-
     <style name="P42A">
         <!--
         text-color: #1CB8A3 100%
         font-size: 42px
          font-face: PingFang-SC-Medium
         -->
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">42px</item>
         <item name="android:textColor">#1CB8A3</item>
     </style>
@@ -28,7 +23,6 @@
         font-size: 24px
         font-face: PingFangSC-Regular
     -->
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">24px</item>
         <item name="android:textColor">#1CB8A3</item>
     </style>
@@ -38,7 +32,7 @@
             font-size: 36px
             font-face: PingFangSC-Regular
         -->
-        <item name="android:textStyle">bold</item>
+
         <item name="android:textSize">36px</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
@@ -48,7 +42,6 @@
             font-size: 24px
             font-face: CenturyGothic
         -->
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">24px</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
@@ -58,7 +51,6 @@
             font-size: 36px
             font-face: CenturyGothic
         -->
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">36px</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
@@ -68,7 +60,6 @@
             font-size: 60px
             font-face: CenturyGothic
         -->
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">60px</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
@@ -78,7 +69,6 @@
             font-size: 66px
             font-face: BebasNeueBold
         -->
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">66px</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
@@ -88,7 +78,6 @@
             font-size: 100px
             font-face: BebasNeueBold
         -->
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">100px</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
@@ -98,7 +87,6 @@
             font-size: 36px
             font-face: PingFangSC-Regular
         -->
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">36px</item>
         <item name="android:textColor">#9B9B9B</item>
     </style>

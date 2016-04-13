@@ -2,7 +2,14 @@ package com.yihukurama.cartoolst;
 
 import android.animation.ObjectAnimator;
 import android.app.Application;
+import android.app.Service;
+import android.content.Context;
+import android.os.Vibrator;
 
+import com.baidu.location.LocationClient;
+import com.baidu.mapapi.SDKInitializer;
+import com.yihukurama.cartoolst.controler.sdk.baidu.Location.service.LocationService;
+import com.yihukurama.cartoolst.controler.sdk.baidu.Location.service.WriteLog;
 import com.yihukurama.cartoolst.model.ConstantValue;
 import com.yihukurama.cartoolst.model.MusicBean;
 
@@ -19,6 +26,8 @@ public class CartoolApp extends Application {
     static String musicStatus = ConstantValue.STOP;
     static String mediaStatus = ConstantValue.STOP;
     public static ObjectAnimator cdAnimation = null;
+    public LocationService locationService;
+    public Vibrator mVibrator;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,20 +35,28 @@ public class CartoolApp extends Application {
         mediaStatus = ConstantValue.STOP;
 
         initMusicList();
+
+        /***
+         * 初始化定位sdk，建议在Application中创建
+         */
+        locationService = new LocationService(getApplicationContext());
+        mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
+        WriteLog.getInstance().init(); // 初始化日志
+        SDKInitializer.initialize(getApplicationContext());
     }
 
     private void initMusicList() {
-        String musicName[] ={
-                "The Mamas & the Papas - California Dreamin'",
-                "Moumoon - Sunshine Girl",
-                "Madonna - Living For Love",
-                "Lilly Wood & The Prick,Robin Schulz - Prayer In C (Robin Schulz Remix)"
-
-        } ;
-        String singer[] = {
-            "The Mamas & the Papas", "Sunshine Girl",
+        String singer[] ={
+                "The Mamas & the Papas",
+                "Moumoon",
                 "Madonna",
                 "Lilly Wood & The Prick,Robin Schulz"
+
+        } ;
+        String musicName[] = {
+            "The Mamas & the Papas", "Sunshine Girl",
+                "Madonna",
+                "Prayer In C (Robin Schulz Remix)"
         } ;
         int cd[] = {R.raw.cddreamin,R.raw.cdgirl,R.raw.cdlove,R.raw.cdremix};
         int cdView[] = {R.drawable.cddreamin,R.drawable.cdgirl,R.drawable.cdlove,R.drawable.cdremix};
@@ -66,4 +83,6 @@ public class CartoolApp extends Application {
     public static void setMediaStatus(String mediaStatus) {
         CartoolApp.mediaStatus = mediaStatus;
     }
+
+
 }

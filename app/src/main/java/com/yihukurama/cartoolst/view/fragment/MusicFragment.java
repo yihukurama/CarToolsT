@@ -151,10 +151,6 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         Uri uri;
         switch (v.getId()){
-            case R.id.cd:
-                uri = Uri.parse(UriSet.TRA2CALLF);
-                mListener.onFragmentInteraction(uri);
-                break;
             case R.id.play:
                 playBtn.setVisibility(View.GONE);
                 pauseBtn.setVisibility(View.VISIBLE);

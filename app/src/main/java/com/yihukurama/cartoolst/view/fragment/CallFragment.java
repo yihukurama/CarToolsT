@@ -106,8 +106,7 @@ public class CallFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.call:
-                Uri uri = Uri.parse(UriSet.TRA2MUSICF);
-                mListener.onFragmentInteraction(uri);
+
                 break;
         }
     }

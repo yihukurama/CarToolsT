@@ -35,6 +35,7 @@
             android:layout_width="1540px"
             android:layout_height="640px"
             android:layout_marginLeft="74px"
+            android:background="@drawable/mokuai"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="false" />
 
@@ -42,10 +43,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginEnd="66px"
             android:layout_toStartOf="@+id/imageright"
             android:layout_marginTop="25px"
-            android:layout_marginRight="74.6px">
+            android:layout_marginRight="35px">
 
             <TextView
                 android:layout_width="wrap_content"

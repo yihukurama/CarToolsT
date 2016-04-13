@@ -15,11 +15,8 @@ import android.widget.ImageView;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.SupportMapFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.yihukurama.cartoolst.R;
-import com.yihukurama.cartoolst.controler.Utils;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
 import com.yihukurama.cartoolst.model.UriSet;
 import com.yihukurama.cartoolst.view.fragment.CallFragment;
@@ -46,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private CallFragment callFragment;
     private MusicFragment musicFragment;
     private ShushiFragment shushiFragment;
-    private SupportMapFragment daohanFragment;
+    private DaohanFragment daohanFragment;
     private DiantaiFragment diantaiFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +69,11 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         FragmentTransaction transaction = fm.beginTransaction();
 
         //overlook:俯视角；zoom：缩放
-        MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(15).build();
+        MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(18).build();
         //compassEnabled是否开启指南针；zoomControlsEnabled：是否按比例缩放；
         BaiduMapOptions bo = new BaiduMapOptions().mapStatus(ms).compassEnabled(false).zoomControlsEnabled(false);
 
-        daohanFragment = SupportMapFragment.newInstance(bo);
-
+        daohanFragment = new DaohanFragment();
         transaction.replace(R.id.showingfragment, daohanFragment);
         transaction.commit();
 
@@ -108,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private void initSlidMenu() {
         menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT_RIGHT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
         menu.setShadowWidthRes(R.dimen.shadow_width);
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         menu.setFadeDegree(0.35f);
@@ -178,29 +174,28 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 transaction = fm.beginTransaction();
                 if (daohanFragment == null) {
                     //overlook:俯视角；zoom：缩放
-                    MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(15).build();
+                    MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(18).build();
                     //compassEnabled是否开启指南针；zoomControlsEnabled：是否按比例缩放；
                     BaiduMapOptions bo = new BaiduMapOptions().mapStatus(ms).compassEnabled(false).zoomControlsEnabled(false);
 
-                    daohanFragment = SupportMapFragment.newInstance(bo);
+                    daohanFragment = new DaohanFragment();
 
                 }
+
                 // 使用当前Fragment的布局替代id_content的控件
                 transaction.replace(R.id.showingfragment, daohanFragment);
                 transaction.commit();
 
-
                 break;
             case R.id.rbutton2:
                 menu.toggle();
-//                transaction = fm.beginTransaction();
-//                if (diantaiFragment == null) {
-//                    diantaiFragment = new DiantaiFragment();
-//                }
-//                // 使用当前Fragment的布局替代id_content的控件
-//                transaction.replace(R.id.showingfragment, diantaiFragment);
-//                transaction.commit();
-                initMap();
+                transaction = fm.beginTransaction();
+                if (diantaiFragment == null) {
+                    diantaiFragment = new DiantaiFragment();
+                }
+                // 使用当前Fragment的布局替代id_content的控件
+                transaction.replace(R.id.showingfragment, diantaiFragment);
+                transaction.commit();
                 break;
             case R.id.rbutton4:
                 menu.toggle();
@@ -219,37 +214,10 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
     }
 
-    private void initMap() {
-
-        MapView mapView = daohanFragment.getMapView();
-
-        Utils.initBaiduMapWidget(this,mapView,this);
-
-
-    }
-
     @Override
     public void onFragmentInteraction(Uri uri) {
         String intent = uri.toString();
         switch (intent) {
-            case UriSet.TRA2MUSICF:
-                transaction = fm.beginTransaction();
-                if (musicFragment == null) {
-                    musicFragment = new MusicFragment();
-                }
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.showingfragment, musicFragment);
-                transaction.commit();
-                break;
-            case UriSet.TRA2CALLF:
-                transaction = fm.beginTransaction();
-                if (callFragment == null) {
-                    callFragment = new CallFragment();
-                }
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.showingfragment, callFragment);
-                transaction.commit();
-                break;
             case UriSet.PLAYMUSIC:
                 Intent intentPlay = new Intent(context,MediaService.class);
                 intentPlay.putExtra("cmd", "play");

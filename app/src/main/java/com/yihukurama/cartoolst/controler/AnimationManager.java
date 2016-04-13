@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
 
 import com.yihukurama.cartoolst.R;
@@ -74,6 +75,36 @@ public class AnimationManager {
         translateAnimation.setDuration(duration);
 
         return translateAnimation;
+    }
+
+    public static void slideview(final float p1, final float p2,final View view,long durationMillis,long delayMillis) {
+        TranslateAnimation animation = new TranslateAnimation(p1, p2, 0, 0);
+        animation.setInterpolator(new OvershootInterpolator());
+        animation.setDuration(durationMillis);
+        animation.setStartOffset(delayMillis);
+        animation.setFillAfter(true);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                int left = view.getLeft()+(int)(p2-p1);
+                int top = view.getTop();
+                int width = view.getWidth();
+                int height = view.getHeight();
+                view.clearAnimation();
+                view.layout(left, top, left+width, top+height);
+
+            }
+        });
+        view.startAnimation(animation);
     }
 
     /**
