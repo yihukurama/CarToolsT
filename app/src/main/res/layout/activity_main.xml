@@ -49,6 +49,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/hourstime"
                 android:text="10:08"
                 style="@style/C60b" />
             <LinearLayout
@@ -59,11 +60,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/datetime"
                     android:text="12/25"
                     style="@style/C24b" />
                 <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/weektime"
                     android:layout_marginLeft="24px"
                     android:text="星期五"
                     style="@style/P24a" />

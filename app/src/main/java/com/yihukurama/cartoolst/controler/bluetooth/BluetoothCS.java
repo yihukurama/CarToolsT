@@ -122,13 +122,13 @@ public class BluetoothCS {
                 socket = device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
                 //连接
                 Message msg2 = new Message();
-                msg2.obj = "请稍候，正在连接服务器:"+address;
+                msg2.obj = "正在连接平板:"+address;
                 LinkDetectedHandler.sendMessage(msg2);
 
                 socket.connect();
 
                 Message msg = new Message();
-                msg.obj = "已经连接上服务端！可以发送信息。";
+                msg.obj = "已连接。";
                 msg.what = 0;
                 LinkDetectedHandler.sendMessage(msg);
                 //启动接受数据
@@ -139,7 +139,7 @@ public class BluetoothCS {
             {
                 Log.e("connect", "", e);
                 Message msg = new Message();
-                msg.obj = "连接服务端异常！断开连接重新试一试。";
+                msg.obj = "连接异常！点击平板重连。";
                 msg.what = 0;
                 LinkDetectedHandler.sendMessage(msg);
             }
@@ -159,7 +159,7 @@ public class BluetoothCS {
                 Log.d("server", "wait cilent connect...");
 
                 Message msg = new Message();
-                msg.obj = "请稍候，正在等待客户端的连接...";
+                msg.obj = "等待手机连接";
                 msg.what = 0;
                 LinkDetectedHandler.sendMessage(msg);
 
@@ -168,7 +168,7 @@ public class BluetoothCS {
                 Log.d("server", "accept success !");
 
                 Message msg2 = new Message();
-                String info = "客户端已经连接上！可以发送信息。";
+                String info = "已连接，点击可断开重连。";
                 msg2.obj = info;
                 msg.what = 0;
                 LinkDetectedHandler.sendMessage(msg2);

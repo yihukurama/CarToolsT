@@ -79,6 +79,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     SeekBar seekBar;
     TextView textView;
     ImageView cdView;
+    Activity context;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +105,11 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
 
         resetUI();
 
+        playBtn.setVisibility(View.GONE);
+        pauseBtn.setVisibility(View.VISIBLE);
+        Intent intentPlay = new Intent(activity,MediaService.class);
+        intentPlay.putExtra("cmd", "play");
+        activity.startService(intentPlay);
     }
 
     private void initView(View view){

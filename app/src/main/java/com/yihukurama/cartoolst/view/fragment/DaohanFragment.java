@@ -2,6 +2,7 @@ package com.yihukurama.cartoolst.view.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
 import com.baidu.location.Poi;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -22,12 +21,10 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
-import com.yihukurama.cartoolst.controler.AnimationManager;
 import com.yihukurama.cartoolst.controler.sdk.baidu.Location.service.LocationService;
 
 
@@ -119,13 +116,15 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
 
         mBaiduMap = mapView.getMap();
         //overlook:俯视角；zoom：缩放
-        MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(bilichi).build();
+        Point p = new Point(1400,600);
+        MapStatus ms = new MapStatus.Builder().zoom(bilichi).targetScreen(p).build();
         //compassEnabled是否开启指南针；zoomControlsEnabled：是否按比例缩放；
 
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomIn());
 
         //设置缩放尺寸
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(ms));
+
         locationService.start();
     }
 
@@ -344,11 +343,11 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
 
         mBaiduMap.setMyLocationConfigeration(config);
 
-        MapStatus ms = new MapStatus.Builder().zoom(bilichi).build();
+        Point p = new Point(1400,600);
+        MapStatus ms = new MapStatus.Builder().zoom(bilichi).targetScreen(p).build();
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomIn());
         //设置缩放尺寸
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(ms));
-
         // 当不需要定位图层时关闭定位图层
 //        mBaiduMap.setMyLocationEnabled(false);
         locationService.stop(); //停止定位服务

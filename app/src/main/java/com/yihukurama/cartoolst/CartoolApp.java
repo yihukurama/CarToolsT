@@ -3,10 +3,8 @@ package com.yihukurama.cartoolst;
 import android.animation.ObjectAnimator;
 import android.app.Application;
 import android.app.Service;
-import android.content.Context;
 import android.os.Vibrator;
 
-import com.baidu.location.LocationClient;
 import com.baidu.mapapi.SDKInitializer;
 import com.yihukurama.cartoolst.controler.sdk.baidu.Location.service.LocationService;
 import com.yihukurama.cartoolst.controler.sdk.baidu.Location.service.WriteLog;
@@ -28,6 +26,8 @@ public class CartoolApp extends Application {
     public static ObjectAnimator cdAnimation = null;
     public LocationService locationService;
     public Vibrator mVibrator;
+    public static String cheneidushu = "18";
+    public static String chewaidushu = "24";
     @Override
     public void onCreate() {
         super.onCreate();

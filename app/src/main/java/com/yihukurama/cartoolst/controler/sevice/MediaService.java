@@ -20,6 +20,7 @@ public class MediaService extends Service {
     int maxSeekBar;
     int nowSeekBar;
     Thread sendBCThread;
+    Thread timeThread;
     MusicBean currentMusic;
     @Override
     public void onCreate() {
@@ -37,6 +38,25 @@ public class MediaService extends Service {
 
         }
 
+        timeThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+
+                    Intent intent = new Intent(SendBroadCast.resetTime);
+                    sendBroadcast(intent);
+                    try {
+
+                        Thread.sleep(30000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        break;
+                    }
+
+
+                }
+            }
+        });
 
         sendBCThread = new Thread(new Runnable() {
 
@@ -70,6 +90,7 @@ public class MediaService extends Service {
 
 
         sendBCThread.start();
+        timeThread.start();
     }
 
     private void startLastMusic(){

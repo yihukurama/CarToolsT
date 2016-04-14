@@ -1,7 +1,9 @@
 package com.yihukurama.cartoolst.view.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,10 +22,15 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.MapStatus;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
+import com.yihukurama.cartoolst.controler.AnimationManager;
+import com.yihukurama.cartoolst.controler.Utils;
 import com.yihukurama.cartoolst.controler.bluetooth.BluetoothCS;
+import com.yihukurama.cartoolst.controler.broadcast.SendBroadCast;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
 import com.yihukurama.cartoolst.model.Command;
+import com.yihukurama.cartoolst.model.MusicBean;
 import com.yihukurama.cartoolst.model.UriSet;
 import com.yihukurama.cartoolst.view.fragment.CallFragment;
 import com.yihukurama.cartoolst.view.fragment.DaohanFragment;
@@ -55,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     ImageButton menudaohang;
     ImageButton menudiantai;
     ImageButton menucall ;
+    boolean isShowDaohan = true;
+    TextView time1;
+    TextView time2;
+    TextView time3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     }
 
     private void initView() {
+        time1 = (TextView)findViewById(R.id.hourstime);
+        time2 = (TextView)findViewById(R.id.datetime);
+        time3 = (TextView)findViewById(R.id.weektime);
         image1 = (ImageView)findViewById(R.id.imageleft);
         connectTV = (TextView)findViewById(R.id.connect);
         connectTV.setOnClickListener(this);
@@ -108,7 +122,9 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         intentPlay.putExtra("cmd", "");
         startService(intentPlay);
         bcs = new BluetoothCS("C0:EE:FB:46:90:33",LinkDetectedHandler);
-
+        time2.setText(Utils.getTimeDate());
+        time3.setText(Utils.getWeekDate());
+        regesitBC();
     }
 
 
@@ -163,61 +179,23 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         switch (v.getId()) {
             case R.id.menumusic:
                 menu.toggle();
-                transaction = fm.beginTransaction();
-                if (musicFragment == null) {
-                    musicFragment = new MusicFragment();
-                }
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.showingfragment, musicFragment);
-                transaction.commit();
+                transDuomeiti();
                 break;
             case R.id.menushushi:
                 menu.toggle();
-                transaction = fm.beginTransaction();
-                if (shushiFragment == null) {
-                    shushiFragment = new ShushiFragment();
-                }
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.showingfragment, shushiFragment);
-                transaction.commit();
+                transShushi();
                 break;
             case R.id.rbutton1:
                 menu.toggle();
-                transaction = fm.beginTransaction();
-                if (daohanFragment == null) {
-                    //overlook:俯视角；zoom：缩放
-                    MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(18).build();
-                    //compassEnabled是否开启指南针；zoomControlsEnabled：是否按比例缩放；
-                    BaiduMapOptions bo = new BaiduMapOptions().mapStatus(ms).compassEnabled(false).zoomControlsEnabled(false);
-
-                    daohanFragment = new DaohanFragment();
-
-                }
-
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.showingfragment, daohanFragment);
-                transaction.commit();
-
+                transDaohan();
                 break;
             case R.id.rbutton2:
                 menu.toggle();
-                transaction = fm.beginTransaction();
-                if (diantaiFragment == null) {
-                    diantaiFragment = new DiantaiFragment();
-                }
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.showingfragment, diantaiFragment);
-                transaction.commit();
+                transDiantai();
                 break;
             case R.id.rbutton4:
                 menu.toggle();
-                transaction = fm.beginTransaction();
-                if (callFragment == null) {
-                    callFragment = new CallFragment();
-                }
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.showingfragment, callFragment);
-                transaction.commit();
+                transTongxun();
                 break;
             case R.id.connect://开启蓝牙服务端
                 bcs.startServer();
@@ -226,10 +204,65 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 break;
 
         }
-
-
     }
 
+    private void transDuomeiti(){
+        transaction = fm.beginTransaction();
+        if (musicFragment == null) {
+            musicFragment = new MusicFragment();
+        }
+        // 使用当前Fragment的布局替代id_content的控件
+        transaction.replace(R.id.showingfragment, musicFragment);
+        transaction.commit();
+        isShowDaohan = false;
+    }
+    private void transDiantai(){
+        transaction = fm.beginTransaction();
+        if (diantaiFragment == null) {
+            diantaiFragment = new DiantaiFragment();
+        }
+        // 使用当前Fragment的布局替代id_content的控件
+        transaction.replace(R.id.showingfragment, diantaiFragment);
+        transaction.commit();
+        isShowDaohan = false;
+    }
+    private void transShushi(){
+        transaction = fm.beginTransaction();
+        if (shushiFragment == null) {
+            shushiFragment = new ShushiFragment();
+        }
+        // 使用当前Fragment的布局替代id_content的控件
+        transaction.replace(R.id.showingfragment, shushiFragment);
+        transaction.commit();
+        isShowDaohan = false;
+    }
+    private void transTongxun(){
+        transaction = fm.beginTransaction();
+        if (callFragment == null) {
+            callFragment = new CallFragment();
+        }
+        // 使用当前Fragment的布局替代id_content的控件
+        transaction.replace(R.id.showingfragment, callFragment);
+        transaction.commit();
+        isShowDaohan = false;
+    }
+    private void transDaohan(){
+        transaction = fm.beginTransaction();
+        if (daohanFragment == null) {
+            //overlook:俯视角；zoom：缩放
+            MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(18).build();
+            //compassEnabled是否开启指南针；zoomControlsEnabled：是否按比例缩放；
+            BaiduMapOptions bo = new BaiduMapOptions().mapStatus(ms).compassEnabled(false).zoomControlsEnabled(false);
+
+            daohanFragment = new DaohanFragment();
+
+        }
+
+        // 使用当前Fragment的布局替代id_content的控件
+        transaction.replace(R.id.showingfragment, daohanFragment);
+        transaction.commit();
+        isShowDaohan = true;
+    }
     @Override
     public void onFragmentInteraction(Uri uri) {
         String intent = uri.toString();
@@ -263,6 +296,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         super.onDestroy();
         stopService(new Intent(this, MediaService.class));
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
+        unregisterReceiver(msgReceiver);
     }
 
     @Override
@@ -286,13 +320,69 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 connectTV.setText("手机信息：" + mes);
                 switch (mes){
                     case Command.SKIPDUOMEITI:
-                        transaction = fm.beginTransaction();
-                        if (musicFragment == null) {
-                            musicFragment = new MusicFragment();
+                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
+                            menu.toggle();
                         }
-                        // 使用当前Fragment的布局替代id_content的控件
-                        transaction.replace(R.id.showingfragment, musicFragment);
-                        transaction.commit();
+                        transDuomeiti();
+                        break;
+                    case Command.SKIPDAOHAN:
+                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
+                        menu.toggle();
+                         }
+                        transDaohan();
+                        break;
+                    case Command.SKIPDIANTAI:
+                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
+                        menu.toggle();
+                         }
+                        transDiantai();
+                        break;
+                    case Command.SKIPSHUSHI:
+                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
+                            menu.toggle();
+                         }
+                        transShushi();
+                        break;
+                    case Command.SKIPTONGXUN:
+                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
+                            menu.toggle();
+                        }
+                        transTongxun();
+                        break;
+                    case Command.TWOLEFT:
+                        if(menu.isMenuShowing() && !menu.isSecondaryMenuShowing()){
+                            menu.toggle();
+                        }else if(!menu.isSecondaryMenuShowing()){
+                            menu.showSecondaryMenu();
+                        }
+
+                        break;
+                    case Command.TWORIGHT:
+                        if(menu.isSecondaryMenuShowing()){
+                            menu.toggle();
+                        }else if(!menu.isMenuShowing()){
+                            menu.showMenu();
+                        }
+                        break;
+                    case Command.TWOUP:
+                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
+                            menu.toggle();
+                        }
+                        break;
+                    case Command.TWODOWN:
+                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
+                            menu.toggle();
+                        }
+                        if (isShowDaohan){
+
+                        }else{
+                            transDaohan();
+                        }
+                        break;
+                    case Command.EXIT:
+                        bcs.shutdownServer();
+                        bcs.shutdownServer();
+                        bcs.startServer();
                         break;
                     default:
                         break;
@@ -302,15 +392,45 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             {
                 String remes = (String)msg.obj;
                 Log.i(TAG, "server" + remes);
-                connectTV.setText("平板信息："+remes);
-
-
-
-
+                connectTV.setText(remes);
 
             }
         }
 
     };
+
+
+    MsgReceiver msgReceiver;
+    private void regesitBC(){
+        //动态注册广播接收器
+        msgReceiver = new MsgReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(SendBroadCast.resetTime);
+        registerReceiver(msgReceiver, intentFilter);
+
+    }
+
+    /**
+     * 广播接收器
+     * @author len
+     *
+     */
+    public class MsgReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch ( intent.getAction() ){
+                case SendBroadCast.resetTime:
+                    time1.setText(Utils.getTimeHours());
+
+
+                 break;
+
+            }
+
+
+
+        }
+
+    }
 
 }
