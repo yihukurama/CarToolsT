@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.yihukurama.cartoolst.R;
 
@@ -19,7 +20,7 @@ import com.yihukurama.cartoolst.R;
  * Use the {@link ShushiFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShushiFragment extends Fragment {
+public class ShushiFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,6 +32,12 @@ public class ShushiFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    Button kongtiaojia;
+    Button kongtaiojian;
+    Button fengliangjia;
+    Button fengliangjian;
+    Button fengxiangqian;
+    Button fengxiangxia;
     public ShushiFragment() {
         // Required empty public constructor
     }
@@ -66,7 +73,30 @@ public class ShushiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shushi, container, false);
+        View v = inflater.inflate(R.layout.fragment_shushi, container, false);
+        initView(v);
+        initData();
+        return v;
+    }
+
+    private void initView(View v) {
+        kongtiaojia = (Button)v.findViewById(R.id.kongtiaojia);
+        kongtaiojian = (Button)v.findViewById(R.id.kongtiaojian);
+        fengliangjia = (Button)v.findViewById(R.id.fenliangjia);
+        fengliangjian = (Button)v.findViewById(R.id.fengliangjian);
+        fengxiangqian = (Button)v.findViewById(R.id.fengxiangqian);
+        fengxiangxia = (Button)v.findViewById(R.id.fengxiangxia);
+
+        kongtiaojia.setOnClickListener(this);
+        kongtaiojian.setOnClickListener(this);
+        fengliangjia.setOnClickListener(this);
+        fengliangjian.setOnClickListener(this);
+        fengxiangqian.setOnClickListener(this);
+        fengxiangxia.setOnClickListener(this);
+    }
+
+    private void initData() {
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,6 +121,11 @@ public class ShushiFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
     /**

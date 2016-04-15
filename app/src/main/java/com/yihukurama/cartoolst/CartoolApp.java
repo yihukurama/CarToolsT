@@ -26,8 +26,9 @@ public class CartoolApp extends Application {
     public static ObjectAnimator cdAnimation = null;
     public LocationService locationService;
     public Vibrator mVibrator;
-    public static String cheneidushu = "18";
-    public static String chewaidushu = "24";
+    public static int cheneidushu = 18;
+    public static String  chewaidushu = "24";
+    public static int fengliang = 1;
     @Override
     public void onCreate() {
         super.onCreate();

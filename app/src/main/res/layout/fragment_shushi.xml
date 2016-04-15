@@ -66,13 +66,25 @@
                     android:layout_marginBottom="42px"/>
 
 
-
-                <Button
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button"
-                    android:background="@drawable/jiajian"
-                    />
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/kongtiaojia"
+                        android:background="@drawable/youselector"
+                        />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/kongtiaojian"
+                        android:background="@drawable/xiaselector"
+                        />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -118,11 +130,24 @@
                     android:layout_marginTop="42px"
                     android:layout_marginBottom="42px" />
 
-                <Button
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/jiajian"
-                    android:id="@+id/button2" />
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fenliangjia"
+                        android:background="@drawable/youselector"
+                        />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fengliangjian"
+                        android:background="@drawable/xiaselector"
+                        />
+
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -160,12 +185,12 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/button4"
+                        android:id="@+id/fengxiangqian"
                         android:background="@drawable/youselector" />
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/button5"
+                        android:id="@+id/fengxiangxia"
                         android:background="@drawable/xiaselector" />
                 </LinearLayout>
 

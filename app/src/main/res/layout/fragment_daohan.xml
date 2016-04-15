@@ -14,20 +14,39 @@
         android:background="@drawable/mokuai"
         android:clickable="true" />
 
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mudidi"
-        android:background="@drawable/mudidi"
-        android:layout_marginTop="12px"
-        android:layout_marginLeft="20px"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bianqian"
-        android:id="@+id/bianqian"
-        android:layout_below="@+id/mudidi"
-        android:layout_alignStart="@+id/mudidi" />
+        android:orientation="vertical"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="12px">
+
+        <LinearLayout
+            android:layout_width="654px"
+            android:layout_height="120px"
+            android:orientation="horizontal"
+            android:id="@+id/mudidi">
+            <ImageView
+                android:layout_width="150px"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mudidi"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/dizhi"
+                android:text="想去哪儿"
+                android:background="@color/write"
+                android:gravity="left"
+                android:textSize="32px"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bianqian"
+            android:id="@+id/bianqian" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"

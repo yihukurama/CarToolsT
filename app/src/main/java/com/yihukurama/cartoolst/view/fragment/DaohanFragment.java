@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -49,8 +51,8 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     private OnFragmentInteractionListener mListener;
     MapView mapView;
     BaiduMap mBaiduMap;
-    Button mudidiBtn;
-    float bilichi = 20;
+    TextView mudidiView;
+    float bilichi = 16;
     Button bianqianBtn;
     Button cjiaBtn;
     Button cjianBtn;
@@ -113,26 +115,17 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
         //注册监听
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
 
-
         mBaiduMap = mapView.getMap();
-        //overlook:俯视角；zoom：缩放
-        Point p = new Point(1400,600);
-        MapStatus ms = new MapStatus.Builder().zoom(bilichi).targetScreen(p).build();
-        //compassEnabled是否开启指南针；zoomControlsEnabled：是否按比例缩放；
+        MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(bilichi).build();
 
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomIn());
-
-        //设置缩放尺寸
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(ms));
-
         locationService.start();
     }
 
     private void initView(View view) {
         mapView = (MapView)view.findViewById(R.id.bmapView);
         mapView.showZoomControls(false);
-        mudidiBtn = (Button)view.findViewById(R.id.mudidi);
-        mudidiBtn.setOnClickListener(this);
+        mudidiView = (TextView)view.findViewById(R.id.dizhi);
         cjiaBtn = (Button)view.findViewById(R.id.cjia);
         cjiaBtn.setOnClickListener(this);
         cjianBtn = (Button)view.findViewById(R.id.cjian);
@@ -184,11 +177,11 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.cjia:
                 //放大地图
-                fangda();
+                mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomIn());
                 break;
             case R.id.cjian:
                 //缩小地图
-                suoxiao();
+                mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomOut());
                 break;
             case R.id.dinwei:
                 //定位
@@ -303,29 +296,12 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     };
 
 
-    //放大地图，每次0.2
-    private void fangda(){
-        if (bilichi<22) bilichi = bilichi+(float)0.2;
-        MapStatus ms = new MapStatus.Builder().zoom(bilichi).build();
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomIn());
-        //设置缩放尺寸
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(ms));
-        mapView.refreshDrawableState();
-    }
-
-    //缩小地图，每次0.2
-    private void suoxiao(){
-        if (bilichi>0) bilichi=bilichi-(float)0.2;
-        MapStatus ms = new MapStatus.Builder().zoom(bilichi).build();
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomIn());
-        //设置缩放尺寸
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(ms));
-    }
-
     //定位
     private void getLocation(BDLocation location){
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
+
+
         // 构造定位数据
         MyLocationData locData = new MyLocationData.Builder()
                 .accuracy(location.getRadius())
@@ -334,20 +310,18 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
                 .longitude(location.getLongitude()).build();
         // 设置定位数据
         mBaiduMap.setMyLocationData(locData);
+
+        MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(bilichi).targetScreen(new Point(1200, 400)).build();
+        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(ms));
+
+
         // 设置定位图层的配置（定位模式，是否允许方向信息，用户自定义定位图标）
         BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
                 .fromResource(R.drawable.weizhi);
-
         MyLocationConfiguration config = new MyLocationConfiguration(
                 MyLocationConfiguration.LocationMode.FOLLOWING, true, mCurrentMarker);
-
         mBaiduMap.setMyLocationConfigeration(config);
 
-        Point p = new Point(1400,600);
-        MapStatus ms = new MapStatus.Builder().zoom(bilichi).targetScreen(p).build();
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomIn());
-        //设置缩放尺寸
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(ms));
         // 当不需要定位图层时关闭定位图层
 //        mBaiduMap.setMyLocationEnabled(false);
         locationService.stop(); //停止定位服务
