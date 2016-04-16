@@ -55,7 +55,7 @@ public class CartoolApp extends Application {
 
         } ;
         String musicName[] = {
-            "The Mamas & the Papas", "Sunshine Girl",
+            "California Dreamin'", "Sunshine Girl",
                 "Madonna",
                 "Prayer In C (Robin Schulz Remix)"
         } ;
