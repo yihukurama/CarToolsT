@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
+import com.yihukurama.cartoolst.view.activity.MainActivity;
 
 
 /**
@@ -38,6 +41,9 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     Button fengliangjian;
     Button fengxiangqian;
     Button fengxiangxia;
+    TextView fengli;
+    TextView kongtiao;
+
     public ShushiFragment() {
         // Required empty public constructor
     }
@@ -82,10 +88,12 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     private void initView(View v) {
         kongtiaojia = (Button)v.findViewById(R.id.kongtiaojia);
         kongtaiojian = (Button)v.findViewById(R.id.kongtiaojian);
-        fengliangjia = (Button)v.findViewById(R.id.fenliangjia);
+        fengliangjia = (Button)v.findViewById(R.id.fengliangjia);
         fengliangjian = (Button)v.findViewById(R.id.fengliangjian);
         fengxiangqian = (Button)v.findViewById(R.id.fengxiangqian);
         fengxiangxia = (Button)v.findViewById(R.id.fengxiangxia);
+        fengli=(TextView)v.findViewById(R.id.fengli);
+        kongtiao = (TextView)v.findViewById(R.id.kongtiao);
 
         kongtiaojia.setOnClickListener(this);
         kongtaiojian.setOnClickListener(this);
@@ -125,6 +133,41 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.kongtiaojia:
+                if (CartoolApp.cheneidushu<30){
+                    CartoolApp.cheneidushu++;
+                    kongtiao.setText(CartoolApp.cheneidushu+"");
+                    ((MainActivity)getActivity()).cheneiwendu.setText(CartoolApp.cheneidushu+"");
+                }
+                break;
+            case R.id.kongtiaojian:
+                if (CartoolApp.cheneidushu>16){
+                    CartoolApp.cheneidushu--;
+                    kongtiao.setText(CartoolApp.cheneidushu+"");
+                    ((MainActivity)getActivity()).cheneiwendu.setText(CartoolApp.cheneidushu+"");
+                }
+
+                break;
+            case R.id.fengliangjia:
+                if (CartoolApp.fengliang<5){
+                    CartoolApp.fengliang++;
+                    fengli.setText(CartoolApp.fengliang+"");
+                }
+                break;
+            case R.id.fengliangjian:
+                if (CartoolApp.fengliang>1){
+                    CartoolApp.fengliang--;
+                    fengli.setText(CartoolApp.fengliang+"");
+                }
+                break;
+            case R.id.fengxiangqian:
+
+                break;
+            case R.id.fengxiangxia:
+
+                break;
+        }
 
     }
 

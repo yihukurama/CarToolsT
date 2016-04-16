@@ -7,10 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +30,11 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
+import com.yihukurama.cartoolst.controler.MediaManager;
+import com.yihukurama.cartoolst.controler.Utils;
 import com.yihukurama.cartoolst.controler.sdk.baidu.Location.service.LocationService;
+import com.yihukurama.cartoolst.model.ConstantValue;
+import com.yihukurama.cartoolst.view.activity.MainActivity;
 
 
 /**
@@ -51,7 +58,7 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     private OnFragmentInteractionListener mListener;
     MapView mapView;
     BaiduMap mBaiduMap;
-    TextView mudidiView;
+    EditText mudidiView;
     float bilichi = 16;
     Button bianqianBtn;
     Button cjiaBtn;
@@ -125,7 +132,7 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     private void initView(View view) {
         mapView = (MapView)view.findViewById(R.id.bmapView);
         mapView.showZoomControls(false);
-        mudidiView = (TextView)view.findViewById(R.id.dizhi);
+        mudidiView = (EditText)view.findViewById(R.id.dizhi);
         cjiaBtn = (Button)view.findViewById(R.id.cjia);
         cjiaBtn.setOnClickListener(this);
         cjianBtn = (Button)view.findViewById(R.id.cjian);
@@ -135,6 +142,20 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
         dinweiBtn = (Button)view.findViewById(R.id.dinwei);
         dinweiBtn.setOnClickListener(this);
 
+        mudidiView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				/*判断是否是“GO”键*/
+                Log.i(TAG,actionId+"输入法搜索id");
+                if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+
+                    MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -173,7 +194,7 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.bianqian:
                 //播放视频
-
+                MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA);
                 break;
             case R.id.cjia:
                 //放大地图

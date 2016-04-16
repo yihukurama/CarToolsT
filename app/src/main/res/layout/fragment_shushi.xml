@@ -29,7 +29,6 @@
                 <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/kongtiao"
                     android:text="空调"
                     style="@style/P42A" />
 
@@ -43,7 +42,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView"
+                        android:id="@+id/kongtiao"
                         android:text="24"
                         style="@style/B100B" />
                     <ImageView
@@ -73,13 +72,13 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/kongtiaojia"
+                        android:id="@+id/kongtiaojian"
                         android:background="@drawable/youselector"
                         />
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/kongtiaojian"
+                        android:id="@+id/kongtiaojia"
                         android:background="@drawable/xiaselector"
                         />
 
@@ -105,13 +104,12 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/fengli"
                         android:background="@drawable/fengli"/>
                     <TextView
                         style="@style/B100B"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView2"
+                        android:id="@+id/fengli"
                         android:text="1" />
 
                     <TextView
@@ -137,13 +135,13 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/fenliangjia"
+                        android:id="@+id/fengliangjian"
                         android:background="@drawable/youselector"
                         />
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/fengliangjian"
+                        android:id="@+id/fengliangjia"
                         android:background="@drawable/xiaselector"
                         />
 

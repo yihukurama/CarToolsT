@@ -17,20 +17,20 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.MapStatus;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
-import com.yihukurama.cartoolst.controler.AnimationManager;
+import com.yihukurama.cartoolst.controler.MediaManager;
 import com.yihukurama.cartoolst.controler.Utils;
 import com.yihukurama.cartoolst.controler.bluetooth.BluetoothCS;
 import com.yihukurama.cartoolst.controler.broadcast.SendBroadCast;
 import com.yihukurama.cartoolst.controler.sevice.MediaService;
 import com.yihukurama.cartoolst.model.Command;
-import com.yihukurama.cartoolst.model.MusicBean;
+import com.yihukurama.cartoolst.model.ConstantValue;
 import com.yihukurama.cartoolst.model.UriSet;
 import com.yihukurama.cartoolst.view.fragment.CallFragment;
 import com.yihukurama.cartoolst.view.fragment.DaohanFragment;
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     TextView time1;
     TextView time2;
     TextView time3;
+    public TextView cheneiwendu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,22 +87,18 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     }
 
     private void setDefaultFragment() {
-        fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-
-        //overlook:俯视角；zoom：缩放
-        MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(18).build();
-        //compassEnabled是否开启指南针；zoomControlsEnabled：是否按比例缩放；
-        BaiduMapOptions bo = new BaiduMapOptions().mapStatus(ms).compassEnabled(false).zoomControlsEnabled(false);
-
-        daohanFragment = new DaohanFragment();
-        transaction.replace(R.id.showingfragment, daohanFragment);
-        transaction.commit();
-
         musicFragment = new MusicFragment();
         shushiFragment = new ShushiFragment();
         callFragment = new CallFragment();
         diantaiFragment = new DiantaiFragment();
+        daohanFragment = new DaohanFragment();
+
+        fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.showingfragment, shushiFragment);
+        transaction.commit();
+
+
     }
 
     private void initView() {
@@ -110,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         time3 = (TextView)findViewById(R.id.weektime);
         image1 = (ImageView)findViewById(R.id.imageleft);
         connectTV = (TextView)findViewById(R.id.connect);
+        cheneiwendu = (TextView)findViewById(R.id.cheneiwendu);
         connectTV.setOnClickListener(this);
         setDefaultFragment();
         initSlidMenu();
@@ -195,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 break;
             case R.id.rbutton4:
                 menu.toggle();
-                transTongxun();
+                MediaManager.playDefault(context, ConstantValue.TONGXUNMEDIA);
                 break;
             case R.id.connect://开启蓝牙服务端
                 bcs.startServer();

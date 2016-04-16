@@ -104,12 +104,6 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         regesitBC();
 
         resetUI();
-
-        playBtn.setVisibility(View.GONE);
-        pauseBtn.setVisibility(View.VISIBLE);
-        Intent intentPlay = new Intent(activity,MediaService.class);
-        intentPlay.putExtra("cmd", "play");
-        activity.startService(intentPlay);
     }
 
     private void initView(View view){

@@ -26,17 +26,15 @@
             android:layout_height="120px"
             android:orientation="horizontal"
             android:id="@+id/mudidi">
-            <ImageView
-                android:layout_width="150px"
-                android:layout_height="wrap_content"
-                android:background="@drawable/mudidi"/>
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/dizhi"
-                android:text="想去哪儿"
+                android:hint="想去哪儿"
+                android:textColor="@color/color0D152B"
                 android:background="@color/write"
-                android:gravity="left"
+                android:textColorHint="@color/color0D152B"
+                android:gravity="center"
                 android:textSize="32px"/>
         </LinearLayout>
         <Button

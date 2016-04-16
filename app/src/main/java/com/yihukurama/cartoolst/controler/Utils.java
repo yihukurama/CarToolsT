@@ -1,8 +1,10 @@
 package com.yihukurama.cartoolst.controler;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -72,5 +74,7 @@ public class Utils {
         }
         return "星期" + mWay;
     }
+
+
 }
 

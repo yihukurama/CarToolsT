@@ -162,5 +162,8 @@ public class AnimationManager {
 
     }
 
+    public static void transX(){
+
+    }
 }
 

@@ -11,4 +11,7 @@ public class ConstantValue {
 
 
     public final static int UPDATESEEKBAR = 0;
+
+    public final static String DAOHANMEDIA = "广美车载项目-动效演示.mp4";
+    public final static String TONGXUNMEDIA = "广美车载项目-动效演示.mp4";
 }
