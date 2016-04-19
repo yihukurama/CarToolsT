@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
     final static String TAG = MainActivity.class.getSimpleName();
     ImageView image1;
-    SlidingMenu menu;
+    public SlidingMenu menu;
     TextView connectTV;
     Context context;
     BluetoothCS bcs;
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private void initSlidMenu() {
         menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT_RIGHT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         menu.setShadowWidthRes(R.dimen.shadow_width);
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         menu.setFadeDegree(0.35f);

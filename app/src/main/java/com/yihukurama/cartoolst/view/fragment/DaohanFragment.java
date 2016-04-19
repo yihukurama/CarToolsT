@@ -64,7 +64,7 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     Button cjiaBtn;
     Button cjianBtn;
     Button dinweiBtn;
-    private Activity context;
+    private MainActivity context;
 
     public DaohanFragment() {
         // Required empty public constructor
@@ -110,11 +110,13 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     }
 
     private void prepare() {
-        context = getActivity();
+        context = (MainActivity)getActivity();
     }
 
     private void initData() {
 
+        //两边侧滑栏忽略滑动时间
+        context.menu.addIgnoredView(mapView);
         // -----------location config ------------
         locationService = ((CartoolApp) this.context.getApplication()).locationService;
         //获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
