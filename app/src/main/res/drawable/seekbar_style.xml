@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- SEEKBAR背景底部的颜色 -->
-    <item android:id="@android:id/background">
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/background">
         <shape>
-            <rectangle android:startColor="#FFFFFF"
-                android:centerColor="#FFFFFF"
-                android:endColor="#FFFFFF"/>
-
+            <solid android:color="#ff51495e" />
         </shape>
     </item>
-    <!-- 拖动后的颜色 -->
-    <item android:id="@android:id/progress">
+    <item android:id="@+id/secondaryProgress">
         <clip>
             <shape>
-                <rectangle
-                    android:startColor="#FFFFFF"
-                    android:centerColor="#FFFFFF"
-                    android:color="#2CA393"/>
+                <solid android:color="#ff51495e" />
             </shape>
         </clip>
     </item>
-</layer-list>
+    <item android:id="@+id/progress">
+        <clip>
+            <shape>
+                <solid android:color="#ff996dfe" />
+            </shape>
+        </clip>
+    </item>
+</layer-list> 

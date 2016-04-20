@@ -73,13 +73,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/kongtiaojian"
-                        android:background="@drawable/youselector"
+                        android:background="@drawable/jianselector"
                         />
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/kongtiaojia"
-                        android:background="@drawable/xiaselector"
+                        android:background="@drawable/jiaselector"
                         />
 
                 </LinearLayout>
@@ -136,13 +136,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/fengliangjian"
-                        android:background="@drawable/youselector"
+                        android:background="@drawable/jiaselector"
                         />
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/fengliangjia"
-                        android:background="@drawable/xiaselector"
+                        android:background="@drawable/jianselector"
                         />
 
                 </LinearLayout>
