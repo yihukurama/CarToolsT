@@ -37,12 +37,31 @@
                 android:gravity="center"
                 android:textSize="32px"/>
         </LinearLayout>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bianqian"
-            android:id="@+id/bianqian" />
-
+            android:id="@+id/bianqian5" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bianqian1"
+            android:background="@drawable/bianqian1selector"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bianqian2"
+            android:background="@drawable/bianqian2selector"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bianqian3"
+            android:background="@drawable/bianqian3selector"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bianqian4"
+            android:background="@drawable/bianqian4selector"/>
     </LinearLayout>
 
 

@@ -64,6 +64,7 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     Button cjiaBtn;
     Button cjianBtn;
     Button dinweiBtn;
+    View view;
     private MainActivity context;
 
     public DaohanFragment() {
@@ -102,11 +103,17 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_daohan, container, false);
+        view = inflater.inflate(R.layout.fragment_daohan, container, false);
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
         prepare();
         initView(view);
         initData();
-        return view;
+        super.onStart();
     }
 
     private void prepare() {
@@ -139,7 +146,7 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
         cjiaBtn.setOnClickListener(this);
         cjianBtn = (Button)view.findViewById(R.id.cjian);
         cjianBtn.setOnClickListener(this);
-        bianqianBtn = (Button)view.findViewById(R.id.bianqian);
+        bianqianBtn = (Button)view.findViewById(R.id.bianqian1);
         bianqianBtn.setOnClickListener(this);
         dinweiBtn = (Button)view.findViewById(R.id.dinwei);
         dinweiBtn.setOnClickListener(this);
@@ -194,7 +201,7 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
                 //便签飞出
                 Log.i(TAG,"点击便签");
                 break;
-            case R.id.bianqian:
+            case R.id.bianqian1:
                 //播放视频
                 MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA);
                 break;
