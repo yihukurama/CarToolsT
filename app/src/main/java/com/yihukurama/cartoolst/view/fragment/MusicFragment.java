@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -22,7 +21,6 @@ import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
 import com.yihukurama.cartoolst.controler.AnimationManager;
 import com.yihukurama.cartoolst.controler.broadcast.SendBroadCast;
-import com.yihukurama.cartoolst.controler.sevice.MediaService;
 import com.yihukurama.cartoolst.model.ConstantValue;
 import com.yihukurama.cartoolst.model.MusicBean;
 import com.yihukurama.cartoolst.model.UriSet;
@@ -104,6 +102,16 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         regesitBC();
 
         resetUI();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (CartoolApp.cdAnimation != null && CartoolApp.cdAnimation.isPaused())
+        {
+            CartoolApp.cdAnimation.resume();
+        }
     }
 
     private void initView(View view){

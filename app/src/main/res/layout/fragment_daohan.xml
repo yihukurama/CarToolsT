@@ -21,26 +21,23 @@
         android:layout_marginLeft="20px"
         android:layout_marginTop="12px">
 
-        <LinearLayout
-            android:layout_width="654px"
-            android:layout_height="120px"
-            android:orientation="horizontal"
-            android:id="@+id/mudidi">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/dizhi"
                 android:hint="想去哪儿"
+                android:drawableLeft="@drawable/mudidi"
                 android:textColor="@color/color0D152B"
                 android:background="@color/write"
                 android:textColorHint="@color/color0D152B"
                 android:gravity="center"
-                android:textSize="32px"/>
-        </LinearLayout>
+                android:textSize="32px"
+                android:layout_marginRight="4px" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/fujin"
             android:id="@+id/bianqian5" />
         <Button
             android:layout_width="wrap_content"

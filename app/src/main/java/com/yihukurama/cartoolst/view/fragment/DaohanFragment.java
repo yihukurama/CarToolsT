@@ -197,10 +197,6 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.mudidi:
-                //便签飞出
-                Log.i(TAG,"点击便签");
-                break;
             case R.id.bianqian1:
                 //播放视频
                 MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA);

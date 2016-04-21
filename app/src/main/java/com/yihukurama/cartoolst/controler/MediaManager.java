@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
-import com.baidu.mapapi.map.MapView;
+import com.yihukurama.cartoolst.CartoolApp;
 
 import java.io.File;
 
@@ -36,6 +36,10 @@ public class MediaManager {
     }
 
     public static void playDefault(Context context,String path){
+        if (CartoolApp.cdAnimation != null && CartoolApp.cdAnimation.isRunning())
+        {
+            CartoolApp.cdAnimation.pause();
+        }
         Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getPath()+File.separator+path);
         //调用系统自带的播放器
         Intent intent = new Intent(Intent.ACTION_VIEW);
