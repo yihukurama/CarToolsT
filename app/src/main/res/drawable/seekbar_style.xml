@@ -3,20 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/background">
         <shape>
-            <solid android:color="#ff51495e" />
+            <solid android:color="#FFFFFF" />
         </shape>
     </item>
     <item android:id="@+id/secondaryProgress">
         <clip>
             <shape>
-                <solid android:color="#ff51495e" />
+                <solid android:color="#FFFFFF" />
             </shape>
         </clip>
     </item>
     <item android:id="@+id/progress">
         <clip>
             <shape>
-                <solid android:color="#ff996dfe" />
+                <solid android:color="#2CA393" />
             </shape>
         </clip>
     </item>
