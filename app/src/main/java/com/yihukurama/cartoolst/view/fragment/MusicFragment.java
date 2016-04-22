@@ -1,6 +1,5 @@
 package com.yihukurama.cartoolst.view.fragment;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +23,7 @@ import com.yihukurama.cartoolst.controler.broadcast.SendBroadCast;
 import com.yihukurama.cartoolst.model.ConstantValue;
 import com.yihukurama.cartoolst.model.MusicBean;
 import com.yihukurama.cartoolst.model.UriSet;
+import com.yihukurama.cartoolst.view.activity.MainActivity;
 
 
 /**
@@ -45,7 +45,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private Activity activity;
+    private MainActivity activity;
     public MusicFragment() {
         // Required empty public constructor
     }
@@ -77,7 +77,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     SeekBar seekBar;
     TextView textView;
     ImageView cdView;
-    Activity context;
+
+    View view;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,17 +92,20 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_music, container, false);
+        view = inflater.inflate(R.layout.fragment_music, container, false);
         initView(view);
         initData();
         return view;
     }
 
     private void initData() {
-        activity = getActivity();
+        activity = (MainActivity)getActivity();
         regesitBC();
 
         resetUI();
+        activity.menu.addIgnoredView(view);
+
+
     }
 
 

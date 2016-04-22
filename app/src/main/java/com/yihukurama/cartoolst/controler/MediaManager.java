@@ -18,7 +18,7 @@ import java.io.File;
  */
 public class MediaManager {
 
-
+    public static boolean isplaying = false;
     public static void playVideo(Context context,String path,final VideoView videoView){
         videoView.setVisibility(View.VISIBLE);
         Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getPath()+ File.separator+path);
@@ -44,6 +44,7 @@ public class MediaManager {
         //调用系统自带的播放器
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, "video/mp4");
+        isplaying = true;
         context.startActivity(intent);
     }
 

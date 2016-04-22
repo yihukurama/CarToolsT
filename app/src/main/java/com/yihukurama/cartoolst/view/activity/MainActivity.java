@@ -195,6 +195,12 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 MediaManager.playDefault(context, ConstantValue.TONGXUNMEDIA);
                 break;
             case R.id.connect://开启蓝牙服务端
+
+                try{
+                    bcs.shutdownServer();
+                }catch (Exception e){
+
+                }
                 bcs.startServer();
                 break;
             default:
@@ -310,6 +316,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         @Override
         public void handleMessage(Message msg) {
 
+            if(MediaManager.isplaying) return;
             if(msg.what==1)//客户端
             {
                 String mes = (String)msg.obj;
@@ -430,4 +437,10 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MediaManager.isplaying = false;
+
+    }
 }

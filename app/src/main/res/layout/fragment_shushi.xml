@@ -136,13 +136,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/fengliangjian"
-                        android:background="@drawable/jiaselector"
+                        android:background="@drawable/jianselector"
                         />
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/fengliangjia"
-                        android:background="@drawable/jianselector"
+                        android:background="@drawable/jiaselector"
                         />
 
                 </LinearLayout>
