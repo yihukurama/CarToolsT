@@ -12,11 +12,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMapOptions;
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     Context context;
     BluetoothCS bcs;
     FragmentManager fm;
+    RelativeLayout r;
     FragmentTransaction transaction;
     private CallFragment callFragment;
     private MusicFragment musicFragment;
@@ -101,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     }
 
     private void initView() {
+        r = (RelativeLayout)findViewById(R.id.main);
         time1 = (TextView)findViewById(R.id.hourstime);
         time2 = (TextView)findViewById(R.id.datetime);
         time3 = (TextView)findViewById(R.id.weektime);
@@ -113,6 +119,12 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
     }
 
+
+    double moveY;
+    double moveX;
+    double bX,bY,eX,eY;
+    int mode;
+    GestureDetector gestureDetector;
     private void initData() {
         //开启播放音乐的service
         Intent intentPlay = new Intent(context,MediaService.class);
@@ -122,6 +134,46 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         time2.setText(Utils.getTimeDate());
         time3.setText(Utils.getWeekDate());
         regesitBC();
+
+        menu.addIgnoredView(r);
+        gestureDetector = new GestureDetector(this,new MyGesture());
+        r.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                    case MotionEvent.ACTION_DOWN:
+                        mode = 1;
+                        bX = event.getX();
+                        bY = event.getY();
+                        Log.i(TAG, "单点down");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        eX = event.getX();
+                        eY = event.getY();
+                        Log.i(TAG, "单点up");
+                        break;
+                    case MotionEvent.ACTION_POINTER_UP:
+                        break;
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        mode += 1;
+                        Log.i(TAG, "多点" + mode);
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        // 手指滑动事件
+                        if (mode == 1) {
+                            // 是一个手指拖动
+
+                        } else if (mode == 2) {
+                            // 两个手指滑动
+
+                        } else if (mode == 3) {
+
+                        }
+                        break;
+                }
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
     }
 
 
@@ -129,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private void initSlidMenu() {
         menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT_RIGHT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
         menu.setShadowWidthRes(R.dimen.shadow_width);
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         menu.setFadeDegree(0.35f);
@@ -137,32 +189,27 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         menu.setMenu(R.layout.slidmenu_left);
         menu.setSecondaryMenu(R.layout.slidemenu_right);
         menu.setOnClickListener(this);
+
+        RelativeLayout lm = (RelativeLayout)menu.getSecondaryMenu().findViewById(R.id.left_menu);
+        menu.addIgnoredView(lm);
         menumusic = (ImageButton) menu.findViewById(R.id.menumusic);
         menushushi = (ImageButton) menu.findViewById(R.id.menushushi);
         menudaohang = (ImageButton) menu.findViewById(R.id.rbutton1);
         menudiantai = (ImageButton) menu.findViewById(R.id.rbutton2);
         menucall = (ImageButton) menu.findViewById(R.id.rbutton4);
-        menu.addIgnoredView(menushushi);
-        menu.addIgnoredView(menumusic);
-        menu.addIgnoredView(menudaohang);
-        menu.addIgnoredView(menudiantai);
-        menu.addIgnoredView(menucall);
         menumusic.setOnClickListener(this);
         menushushi.setOnClickListener(this);
         menudaohang.setOnClickListener(this);
         menudiantai.setOnClickListener(this);
         menucall.setOnClickListener(this);
 
+        RelativeLayout rm = (RelativeLayout)menu.getSecondaryMenu().findViewById(R.id.right_menu);
+        menu.addIgnoredView(rm);
         menumusic = (ImageButton) menu.getSecondaryMenu().findViewById(R.id.menumusic);
         menushushi = (ImageButton) menu.getSecondaryMenu().findViewById(R.id.menushushi);
         menudaohang = (ImageButton) menu.getSecondaryMenu().findViewById(R.id.rbutton1);
         menudiantai = (ImageButton) menu.getSecondaryMenu().findViewById(R.id.rbutton2);
         menucall = (ImageButton) menu.getSecondaryMenu().findViewById(R.id.rbutton4);
-        menu.addIgnoredView(menushushi);
-        menu.addIgnoredView(menumusic);
-        menu.addIgnoredView(menudaohang);
-        menu.addIgnoredView(menudiantai);
-        menu.addIgnoredView(menucall);
         menumusic.setOnClickListener(this);
         menushushi.setOnClickListener(this);
         menudaohang.setOnClickListener(this);
@@ -442,5 +489,89 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         super.onResume();
         MediaManager.isplaying = false;
 
+    }
+
+    public void showShortToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    class MyGesture implements GestureDetector.OnGestureListener{
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public void onShowPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            return false;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+
+        }
+
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            Log.i(TAG, "mode" + mode);
+
+            moveX = eX - bX;
+            moveY = eY - bY;
+
+            if(Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>120){//上下滑动
+                if(moveY<0){
+                    Log.i(TAG, "上滑" + mode);
+                    if(mode == 1){
+                        showShortToast("oneup");
+                    }else if(mode == 2){
+                        showShortToast("twoup");
+                    }else{
+                        showShortToast("threeup");
+                    }
+                }else{
+                    Log.i(TAG,"下滑"+mode);
+                    if(mode == 1){
+
+                    }else if(mode == 2){
+                    }else{
+                    }
+                }
+
+            }else{//左右滑动
+                if(moveX<0){
+                    Log.i(TAG, "左滑" + mode);
+                    if(menu.isMenuShowing() && !menu.isSecondaryMenuShowing()){
+                        menu.toggle();
+                    }else if(!menu.isSecondaryMenuShowing()){
+                        menu.showSecondaryMenu();
+                    }
+                }else{
+                    Log.i(TAG, "右滑"+mode);
+                    if(menu.isSecondaryMenuShowing()){
+                        menu.toggle();
+                    }else if(!menu.isMenuShowing()){
+                        menu.showMenu();
+                    }
+                }
+            }
+
+
+
+            mode = 0;
+            Log.i(TAG,"清除");
+            return false;
+        }
     }
 }

@@ -34,7 +34,7 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
+    final String TAG = ShushiFragment.class.getSimpleName();
     Button kongtiaojia;
     Button kongtaiojian;
     Button fengliangjia;
@@ -43,7 +43,7 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     Button fengxiangxia;
     TextView fengli;
     TextView kongtiao;
-
+    View v;
     public ShushiFragment() {
         // Required empty public constructor
     }
@@ -79,7 +79,7 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_shushi, container, false);
+        v = inflater.inflate(R.layout.fragment_shushi, container, false);
         initView(v);
         initData();
         return v;
@@ -104,6 +104,8 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData() {
+
+
 
     }
 
@@ -130,6 +132,7 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
         super.onDetach();
         mListener = null;
     }
+
 
     @Override
     public void onClick(View v) {
@@ -185,4 +188,8 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
+
 }
