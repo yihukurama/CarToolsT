@@ -122,8 +122,9 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
 
     private void initData() {
 
-        //两边侧滑栏忽略滑动时间
+        //两边侧滑栏忽略滑动
         context.menu.addIgnoredView(mapView);
+
         // -----------location config ------------
         locationService = ((CartoolApp) this.context.getApplication()).locationService;
         //获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
@@ -165,6 +166,12 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
                 return false;
             }
         });
+
+
+
+
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

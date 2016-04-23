@@ -8,13 +8,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
@@ -39,7 +42,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    final String TAG = MusicFragment.class.getSimpleName();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -98,17 +101,146 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         return view;
     }
 
+    double moveY;
+    double moveX;
+    double bX,bY,eX,eY;
+    int mode;
+    GestureDetector gestureDetector;
+    TextView fankui;
+    String message;
+
     private void initData() {
         activity = (MainActivity)getActivity();
+        gestureDetector = new GestureDetector(activity,new MyGesture());
         regesitBC();
 
         resetUI();
         activity.menu.addIgnoredView(view);
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                    case MotionEvent.ACTION_DOWN:
+                        mode = 1;
+                        bX = event.getX();
+                        bY = event.getY();
+                        Log.i(TAG,"单点down");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        eX = event.getX();
+                        eY = event.getY();
+                        Log.i(TAG,"单点up");
+                        break;
+                    case MotionEvent.ACTION_POINTER_UP:
+                        break;
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        mode += 1;
+                        Log.i(TAG,"多点"+mode);
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        // 手指滑动事件
+                        if (mode == 1) {
+                            // 是一个手指拖动
+
+                        } else if (mode == 2) {
+                            // 两个手指滑动
+
+                        }else if(mode == 3){
+
+                        }
+                        break;
+                }
+                return gestureDetector.onTouchEvent(event);
+            }
+
+        });
 
 
     }
+    public void showShortToast(String message){
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+    }
+
+    class MyGesture implements GestureDetector.OnGestureListener{
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public void onShowPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            return false;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            Log.i(TAG,"mode"+mode);
+
+            moveX = eX - bX;
+            moveY = eY - bY;
+
+            if(Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>120){//上下滑动
+                if(moveY<0){
+                    Log.i(TAG, "上滑" + mode);
+                    if(mode == 1){
+                        showShortToast("oneup");
+                    }else if(mode == 2){
+                        showShortToast("twoup");
+                    }else{
+                        showShortToast("threeup");
+                    }
+                }else{
+                    Log.i(TAG,"下滑"+mode);
+                    if(mode == 1){
+
+                    }else if(mode == 2){
+                    }else{
+                    }
+                }
+
+            }else{//左右滑动
+                if(moveX<0){
+                    Log.i(TAG,"左滑"+mode);
+                    if(mode == 1){
+
+                    }else if(mode == 2){
+                    }else{
+
+                    }
+                }else{
+                    Log.i(TAG,"右滑"+mode);
+                    if(mode == 1){
+
+                    }else if(mode == 2){
+                    }else{
+
+                    }
+                }
+            }
 
 
+
+            mode = 0;
+            Log.i(TAG,"清除");
+            return false;
+        }
+    }
     @Override
     public void onResume() {
         super.onResume();
