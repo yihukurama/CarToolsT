@@ -27,6 +27,7 @@ import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.MapStatus;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.yihukurama.cartoolst.R;
+import com.yihukurama.cartoolst.controler.AnimationManager;
 import com.yihukurama.cartoolst.controler.MediaManager;
 import com.yihukurama.cartoolst.controler.Utils;
 import com.yihukurama.cartoolst.controler.bluetooth.BluetoothCS;
@@ -536,6 +537,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                     Log.i(TAG, "上滑" + mode);
                     if(mode == 1){
                         showShortToast("oneup");
+                        AnimationManager.moveVertical(180,0,shushiFragment.getView(),1000);
                     }else if(mode == 2){
                         showShortToast("twoup");
                     }else{

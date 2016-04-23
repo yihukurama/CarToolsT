@@ -33,7 +33,6 @@
             android:layout_width="1540px"
             android:layout_height="640px"
             android:layout_marginLeft="74px"
-            android:background="@drawable/mokuai"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="false" />
 
