@@ -112,7 +112,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onResume() {
         super.onResume();
-        if (CartoolApp.cdAnimation != null && CartoolApp.cdAnimation.isPaused())
+        if (CartoolApp.cdAnimation != null && CartoolApp.cdAnimation.isRunning())
         {
             CartoolApp.cdAnimation.resume();
         }
@@ -227,6 +227,9 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
                         break;
                     case SendBroadCast.startAnimation:
                         Log.i("debug", "开始执行动画");
+                        if (CartoolApp.cdAnimation.isRunning()){
+                            CartoolApp.cdAnimation.end();
+                        }
                         CartoolApp.cdAnimation = AnimationManager.rotateSelf(cdView, 40000);
                         CartoolApp.cdAnimation.start();
                         //更新cd，歌曲名和作者
