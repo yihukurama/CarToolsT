@@ -21,7 +21,7 @@
             android:layout_marginLeft="76px"
             android:layout_alignParentStart="true">
 
-            <TextView
+            <com.yihukurama.cartoolst.view.widget.MPingFangFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音乐"
@@ -33,7 +33,7 @@
                 android:text="California Dreamin'"
                 android:layout_marginTop="30px"
                 style="@style/C50"/>
-            <TextView
+            <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                 android:layout_width="wrap_content"
                 android:id="@+id/singer"
                 android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                 android:layout_marginTop="35px"
                 android:max="700"
                 android:progress="50"/>
-            <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
+            <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                 android:id="@+id/time"
                 android:text="00:00/00:00"
                 android:layout_width="wrap_content"

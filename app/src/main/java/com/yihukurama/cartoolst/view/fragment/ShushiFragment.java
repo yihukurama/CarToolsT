@@ -44,6 +44,7 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     TextView fengli;
     TextView kongtiao;
     View v;
+    MainActivity activity;
     public ShushiFragment() {
         // Required empty public constructor
     }
@@ -104,10 +105,11 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData() {
-
+        activity = (MainActivity)getActivity();
 
 
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -133,6 +135,10 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
         mListener = null;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public void onClick(View v) {
@@ -188,7 +194,6 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 
 
 

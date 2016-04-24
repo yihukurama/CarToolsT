@@ -28,8 +28,8 @@ public class BebasNeueFontTextView extends TextView {
 
 
     private void initFont(){
-//        AssetManager assertMgr = getContext().getAssets();
-//        Typeface font = Typeface.createFromAsset(assertMgr,"fonts/BebasNeue Bold.otf");
-//        setTypeface(font);
+        AssetManager assertMgr = getContext().getAssets();
+        Typeface font = Typeface.createFromAsset(assertMgr, "fonts/BebasNeueBold.otf");
+        setTypeface(font);
     }
 }

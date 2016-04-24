@@ -156,6 +156,11 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         activity.unregisterReceiver(msgReceiver);
     }
 

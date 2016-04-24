@@ -16,8 +16,10 @@ import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +63,9 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private ShushiFragment shushiFragment;
     private DaohanFragment daohanFragment;
     private DiantaiFragment diantaiFragment;
-
+    boolean isShowSecoundMenu = false;
+    LinearLayout secll;
+    FrameLayout fl;
     ImageButton menumusic;
     ImageButton menushushi;
     ImageButton menudaohang;
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     TextView time2;
     TextView time3;
     public TextView cheneiwendu;
+    public String currentFragment = "shushi";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +112,9 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     }
 
     private void initView() {
+        secll = (LinearLayout)findViewById(R.id.secoundmenu);
         r = (RelativeLayout)findViewById(R.id.main);
+        fl = (FrameLayout)findViewById(R.id.showingfragment);
         time1 = (TextView)findViewById(R.id.hourstime);
         time2 = (TextView)findViewById(R.id.datetime);
         time3 = (TextView)findViewById(R.id.weektime);
@@ -127,6 +134,12 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     int mode;
     GestureDetector gestureDetector;
     private void initData() {
+        findViewById(R.id.yinyue).setOnClickListener(null);
+        findViewById(R.id.shipin).setOnClickListener(null);
+        findViewById(R.id.dianshi).setOnClickListener(null);
+        findViewById(R.id.youxi).setOnClickListener(null);
+        findViewById(R.id.liulanqi).setOnClickListener(null);
+
         //开启播放音乐的service
         Intent intentPlay = new Intent(context,MediaService.class);
         intentPlay.putExtra("cmd", "");
@@ -265,6 +278,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         // 使用当前Fragment的布局替代id_content的控件
         transaction.replace(R.id.showingfragment, musicFragment);
         transaction.commit();
+        currentFragment = "duomeiti";
         isShowDaohan = false;
     }
     private void transDiantai(){
@@ -275,6 +289,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         // 使用当前Fragment的布局替代id_content的控件
         transaction.replace(R.id.showingfragment, diantaiFragment);
         transaction.commit();
+        currentFragment = "diantai";
         isShowDaohan = false;
     }
     private void transShushi(){
@@ -285,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         // 使用当前Fragment的布局替代id_content的控件
         transaction.replace(R.id.showingfragment, shushiFragment);
         transaction.commit();
+        currentFragment = "shushi";
         isShowDaohan = false;
     }
     private void transTongxun(){
@@ -295,6 +311,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         // 使用当前Fragment的布局替代id_content的控件
         transaction.replace(R.id.showingfragment, callFragment);
         transaction.commit();
+        currentFragment = "tongxun";
         isShowDaohan = false;
     }
     private void transDaohan(){
@@ -312,6 +329,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         // 使用当前Fragment的布局替代id_content的控件
         transaction.replace(R.id.showingfragment, daohanFragment);
         transaction.commit();
+        currentFragment = "daohan";
         isShowDaohan = true;
     }
     @Override
@@ -532,27 +550,41 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             moveX = eX - bX;
             moveY = eY - bY;
 
-            if(Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>120){//上下滑动
+            if(Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>50){//上下滑动
                 if(moveY<0){
                     Log.i(TAG, "上滑" + mode);
+                    if(currentFragment.equals("shushi")){
+                        showShushiMenu();
+                    }else if (currentFragment.equals("duomeiti")){
+                        showDuomeiTiMenu();
+                    }
                     if(mode == 1){
                         showShortToast("oneup");
-                        AnimationManager.moveVertical(180,0,shushiFragment.getView(),1000);
+
                     }else if(mode == 2){
-                        showShortToast("twoup");
+
                     }else{
                         showShortToast("threeup");
                     }
                 }else{
                     Log.i(TAG,"下滑"+mode);
+
+                    if(currentFragment.equals("shushi")){
+                        hideShushiMenu();
+                    }else if (currentFragment.equals("duomeiti")){
+                        hideDuomeiTiMenu();
+                    }
+
                     if(mode == 1){
 
                     }else if(mode == 2){
+
+
                     }else{
                     }
                 }
 
-            }else{//左右滑动
+            }else if ( Math.abs(moveX)>50){//左右滑动
                 if(moveX<0){
                     Log.i(TAG, "左滑" + mode);
                     if(menu.isMenuShowing() && !menu.isSecondaryMenuShowing()){
@@ -575,6 +607,36 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             mode = 0;
             Log.i(TAG,"清除");
             return false;
+
+        }
+        }
+
+
+    private void showDuomeiTiMenu(){
+        if (!isShowSecoundMenu){
+            isShowSecoundMenu = true;
+            AnimationManager.moveVertical(0, -180, fl, 250);
+        }
+    }
+
+    private void hideDuomeiTiMenu(){
+        if (isShowSecoundMenu){
+            isShowSecoundMenu = false;
+            AnimationManager.moveVertical(-180,0,fl,250);
+        }
+    }
+
+    private void showShushiMenu(){
+        if (!isShowSecoundMenu){
+            isShowSecoundMenu = true;
+            AnimationManager.moveVertical(0, -180, fl, 250);
+        }
+    }
+
+    private void hideShushiMenu(){
+        if (isShowSecoundMenu){
+            isShowSecoundMenu = false;
+            AnimationManager.moveVertical(-180,0,fl,250);
         }
     }
 }

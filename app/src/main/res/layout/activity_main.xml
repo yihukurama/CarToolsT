@@ -19,6 +19,74 @@
             android:layout_marginLeft="10px"
             android:layout_centerVertical="true" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/secoundmenu"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginLeft="325px"
+            android:layout_marginBottom="60px"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="211px"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="音乐"
+                android:id="@+id/yinyue"
+                android:textSize="44px"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <TextView
+                android:layout_width="211px"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="视频"
+                android:id="@+id/shipin"
+                android:textSize="44px"
+                android:textColor="@color/secmenuselector"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <TextView
+            android:layout_width="211px"
+            android:gravity="center"
+            android:id="@+id/dianshi"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secmenuselector"
+            android:text="电视"
+            android:textSize="44px"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <TextView
+            android:layout_width="211px"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="游戏"
+                android:id="@+id/youxi"
+            android:textColor="@color/secmenuselector"
+            android:textSize="44px"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <TextView
+                android:layout_width="211px"
+                android:gravity="center"
+                android:textColor="@color/secmenuselector"
+                android:layout_height="wrap_content"
+                android:text="浏览器"
+                android:id="@+id/liulanqi"
+                android:textSize="44px"/>
+
+
+        </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +112,7 @@
             android:layout_marginTop="25px"
             android:layout_marginRight="35px">
 
-            <TextView
+            <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/hourstime"
@@ -55,13 +123,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="18px">
-                <TextView
+                <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/datetime"
                     android:text="12/25"
                     style="@style/C24b" />
-                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/weektime"
@@ -70,7 +138,7 @@
                     style="@style/P24a" />
 
             </LinearLayout>
-            <TextView
+            <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="68px"
@@ -81,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
-                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="26 "
@@ -90,14 +158,14 @@
                     android:layout_width="30px"
                     android:layout_height="30px"
                     android:background="@drawable/du"/>
-                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 晴"
                     style="@style/P36a"/>
             </LinearLayout>
 
-            <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+            <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="34px"
@@ -108,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
-                <TextView
+                <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/cheneiwendu"

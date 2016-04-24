@@ -26,7 +26,7 @@
                 android:layout_marginTop="68px"
                 android:layout_marginBottom="100px">
 
-                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                <com.yihukurama.cartoolst.view.widget.MPingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="空调"
@@ -39,7 +39,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="24px"
                     android:gravity="center">
-                    <TextView
+                    <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/kongtiao"
@@ -54,7 +54,7 @@
                 </LinearLayout>
 
 
-                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/wendu"
@@ -105,21 +105,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/fengli"/>
-                    <TextView
+                    <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
                         style="@style/B100B"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/fengli"
                         android:text="1" />
 
-                    <TextView
+                    <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
                         style="@style/B66B"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView3"
                         android:text="/5" />
                 </LinearLayout>
-                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/fengliang"
@@ -167,13 +167,14 @@
                     android:background="@drawable/fengxiangall"
                     android:layout_marginBottom="24px" />
 
-                <com.yihukurama.cartoolst.view.widget.PingFangFontTextView
+                <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24px"
                     android:id="@+id/fengxiang"
                     style="@style/P36a_2"
                     android:text="风向"
-                    android:layout_marginBottom="74px" />
+                    android:layout_marginBottom="42px" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"

@@ -83,8 +83,8 @@ public class AnimationManager {
         TranslateAnimation mShowAction = new TranslateAnimation(
                 0,
                 0,
-                0,
-                moveY);
+                y1,
+                y2);
         mShowAction.setDuration(duration);
         animationSet.setFillAfter(true);
         animationSet.addAnimation(mShowAction);
