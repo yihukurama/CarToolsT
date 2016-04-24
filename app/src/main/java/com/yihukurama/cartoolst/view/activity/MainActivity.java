@@ -615,28 +615,28 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private void showDuomeiTiMenu(){
         if (!isShowSecoundMenu){
             isShowSecoundMenu = true;
-            AnimationManager.moveVertical(0, -180, fl, 250);
+            AnimationManager.transY(fl, -180);
         }
     }
 
     private void hideDuomeiTiMenu(){
         if (isShowSecoundMenu){
             isShowSecoundMenu = false;
-            AnimationManager.moveVertical(-180,0,fl,250);
+            AnimationManager.transY(fl, 0);
         }
     }
 
     private void showShushiMenu(){
         if (!isShowSecoundMenu){
             isShowSecoundMenu = true;
-            AnimationManager.moveVertical(0, -180, fl, 250);
+            AnimationManager.transY(fl, -180);
         }
     }
 
     private void hideShushiMenu(){
         if (isShowSecoundMenu){
             isShowSecoundMenu = false;
-            AnimationManager.moveVertical(-180,0,fl,250);
+            AnimationManager.transY(fl, 0);
         }
     }
 }
