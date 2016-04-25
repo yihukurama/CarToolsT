@@ -29,7 +29,7 @@ public class CentryTextView extends TextView {
 
     private void initFont(){
         AssetManager assertMgr = getContext().getAssets();
-        Typeface font = Typeface.createFromAsset(assertMgr, "fonts/BebasNeueBold.otf");
+        Typeface font = Typeface.createFromAsset(assertMgr, "fonts/CenturyGothic.TTF");
         setTypeface(font);
     }
 }

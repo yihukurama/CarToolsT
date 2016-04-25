@@ -80,6 +80,7 @@
         -->
         <item name="android:textSize">66px</item>
         <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="B100B">
         <!--
@@ -89,6 +90,7 @@
         -->
         <item name="android:textSize">100px</item>
         <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="P36a_2">
         <!--
@@ -109,6 +111,7 @@
 
         <item name="android:textSize">50px</item>
         <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 

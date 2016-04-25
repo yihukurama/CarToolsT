@@ -28,7 +28,7 @@ public class AnimationManager {
     public static void transY(View view,int moveY){
         float curTranslationY = view.getTranslationY();
         ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, moveY);
-        animator.setDuration(1000);
+        animator.setDuration(250);
         animator.start();
     }
 }
