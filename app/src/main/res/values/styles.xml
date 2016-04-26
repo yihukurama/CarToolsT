@@ -45,6 +45,18 @@
         <item name="android:textSize">36px</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
+
+    <style name="P36a_2">
+        <!--
+            text-color: #FFFFFF 100%
+            font-size: 36px
+            font-face: PingFangSC-Regular
+        -->
+
+        <item name="android:textSize">36px</item>
+        <item name="android:textColor">#9B9B9B</item>
+    </style>
+
     <style name="C24b">
         <!--
             text-color: #FFFFFF 100%
@@ -92,14 +104,17 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="P36a_2">
-        <!--
-            text-color: #9B9B9B 100%
-            font-size: 36px
-            font-face: PingFangSC-Regular
-        -->
-        <item name="android:textSize">36px</item>
-        <item name="android:textColor">#9B9B9B</item>
+
+
+    <style name="B150B">
+        <item name="android:textSize">150px</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="B50B">
+        <item name="android:textSize">50px</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="C50">
