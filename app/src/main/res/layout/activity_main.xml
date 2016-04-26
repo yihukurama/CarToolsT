@@ -189,14 +189,12 @@
                     android:background="@drawable/du"/>
             </LinearLayout>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/connect"
-                android:layout_marginTop="50px"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center"
-                android:text="连接手机请点我..."
-                android:textSize="32px"/>
+                android:layout_marginTop="250px"
+                android:gravity="bottom"
+                android:background="@drawable/weilianjie"/>
         </LinearLayout>
 
     </RelativeLayout>

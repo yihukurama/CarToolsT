@@ -492,7 +492,11 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             {
                 String remes = (String)msg.obj;
                 Log.i(TAG, "server" + remes);
-                connectTV.setText(remes);
+                if(remes.contains("正在连接平板")){
+                    connectTV.setBackground(context.getDrawable(R.drawable.lianjiezhong));
+                }else if(remes.contains("已连接")){
+                    connectTV.setBackground(context.getDrawable(R.drawable.yilianjie));
+                }
 
             }
         }
