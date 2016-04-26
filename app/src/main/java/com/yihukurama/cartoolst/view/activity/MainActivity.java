@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     TextView time3;
     public TextView cheneiwendu;
     public String currentFragment = "shushi";
+    final String secoundMenu1[] ={"空调","车锁","时间","单位","语言"};
+    final String secoundMenu2[] ={"音乐","视频","时间","电视","浏览器"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         findViewById(R.id.dianshi).setOnClickListener(null);
         findViewById(R.id.youxi).setOnClickListener(null);
         findViewById(R.id.liulanqi).setOnClickListener(null);
-
+        setSecMenu();
         //开启播放音乐的service
         Intent intentPlay = new Intent(context,MediaService.class);
         intentPlay.putExtra("cmd", "");
@@ -271,6 +273,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     }
 
     private void transDuomeiti(){
+
         transaction = fm.beginTransaction();
         if (musicFragment == null) {
             musicFragment = new MusicFragment();
@@ -279,9 +282,11 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         transaction.replace(R.id.showingfragment, musicFragment);
         transaction.commit();
         currentFragment = "duomeiti";
+        setSecMenu();
         isShowDaohan = false;
     }
     private void transDiantai(){
+        hideDuomeiTiMenu();
         transaction = fm.beginTransaction();
         if (diantaiFragment == null) {
             diantaiFragment = new DiantaiFragment();
@@ -301,9 +306,11 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         transaction.replace(R.id.showingfragment, shushiFragment);
         transaction.commit();
         currentFragment = "shushi";
+        setSecMenu();
         isShowDaohan = false;
     }
     private void transTongxun(){
+        hideDuomeiTiMenu();
         transaction = fm.beginTransaction();
         if (callFragment == null) {
             callFragment = new CallFragment();
@@ -315,6 +322,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         isShowDaohan = false;
     }
     private void transDaohan(){
+        hideDuomeiTiMenu();
         transaction = fm.beginTransaction();
         if (daohanFragment == null) {
             //overlook:俯视角；zoom：缩放
@@ -360,6 +368,27 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
     }
 
+    private void setSecMenu(){
+        String currentMenup[] = null;
+        if(currentFragment.equals("duomeiti")){
+            currentMenup = secoundMenu2;
+            ((TextView)findViewById(R.id.yinyue)).setText(currentMenup[0]);
+            ((TextView)findViewById(R.id.shipin)).setText(currentMenup[1]);
+            ((TextView)findViewById(R.id.dianshi)).setText(currentMenup[2]);
+            ((TextView)findViewById(R.id.youxi)).setText(currentMenup[3]);
+            ((TextView)findViewById(R.id.liulanqi)).setText(currentMenup[4]);
+        }else if(currentFragment.equals("shushi")){
+            currentMenup = secoundMenu1;
+            ((TextView)findViewById(R.id.yinyue)).setText(currentMenup[0]);
+            ((TextView)findViewById(R.id.shipin)).setText(currentMenup[1]);
+            ((TextView)findViewById(R.id.dianshi)).setText(currentMenup[2]);
+            ((TextView)findViewById(R.id.youxi)).setText(currentMenup[3]);
+            ((TextView)findViewById(R.id.liulanqi)).setText(currentMenup[4]);
+        }
+
+
+
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -553,9 +582,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             if(Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>50){//上下滑动
                 if(moveY<0){
                     Log.i(TAG, "上滑" + mode);
-                    if(currentFragment.equals("shushi")){
-                        showShushiMenu();
-                    }else if (currentFragment.equals("duomeiti")){
+                    if(currentFragment.equals("shushi")||currentFragment.equals("duomeiti")){
                         showDuomeiTiMenu();
                     }
                     if(mode == 1){
@@ -569,9 +596,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 }else{
                     Log.i(TAG,"下滑"+mode);
 
-                    if(currentFragment.equals("shushi")){
-                        hideShushiMenu();
-                    }else if (currentFragment.equals("duomeiti")){
+                    if(currentFragment.equals("shushi")||currentFragment.equals("duomeiti")){
                         hideDuomeiTiMenu();
                     }
 
@@ -615,6 +640,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private void showDuomeiTiMenu(){
         if (!isShowSecoundMenu){
             isShowSecoundMenu = true;
+            findViewById(R.id.secoundmenu).setVisibility(View.VISIBLE);
             AnimationManager.transY(fl, -180);
         }
     }
@@ -623,20 +649,9 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         if (isShowSecoundMenu){
             isShowSecoundMenu = false;
             AnimationManager.transY(fl, 0);
+            findViewById(R.id.secoundmenu).setVisibility(View.GONE);
+
         }
     }
 
-    private void showShushiMenu(){
-        if (!isShowSecoundMenu){
-            isShowSecoundMenu = true;
-            AnimationManager.transY(fl, -180);
-        }
-    }
-
-    private void hideShushiMenu(){
-        if (isShowSecoundMenu){
-            isShowSecoundMenu = false;
-            AnimationManager.transY(fl, 0);
-        }
-    }
 }
