@@ -6,6 +6,8 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.yihukurama.cartoolst.CartoolApp;
+
 /**
  * Created by dengshuai on 16/4/2.
  */
@@ -28,8 +30,6 @@ public class CentryTextView extends TextView {
 
 
     private void initFont(){
-        AssetManager assertMgr = getContext().getAssets();
-        Typeface font = Typeface.createFromAsset(assertMgr, "fonts/CenturyGothic.TTF");
-        setTypeface(font);
+        setTypeface(CartoolApp.getInstace().getTypefaceC());
     }
 }

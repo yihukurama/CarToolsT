@@ -325,13 +325,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         hideDuomeiTiMenu();
         transaction = fm.beginTransaction();
         if (daohanFragment == null) {
-            //overlook:俯视角；zoom：缩放
-            MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(18).build();
-            //compassEnabled是否开启指南针；zoomControlsEnabled：是否按比例缩放；
-            BaiduMapOptions bo = new BaiduMapOptions().mapStatus(ms).compassEnabled(false).zoomControlsEnabled(false);
-
             daohanFragment = new DaohanFragment();
-
         }
 
         // 使用当前Fragment的布局替代id_content的控件

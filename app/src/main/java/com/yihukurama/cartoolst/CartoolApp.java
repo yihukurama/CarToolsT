@@ -3,6 +3,7 @@ package com.yihukurama.cartoolst;
 import android.animation.ObjectAnimator;
 import android.app.Application;
 import android.app.Service;
+import android.graphics.Typeface;
 import android.os.Vibrator;
 
 import com.baidu.mapapi.SDKInitializer;
@@ -19,6 +20,7 @@ import java.util.List;
  * Created by Administrator on 2016/4/3 0003.
  */
 public class CartoolApp extends Application {
+    private static CartoolApp _instance;
     public static int currentMusicIndex = -1;
     public static List<MusicBean> musicBeanList = new ArrayList<MusicBean>();
     static String musicStatus = ConstantValue.STOP;
@@ -29,12 +31,25 @@ public class CartoolApp extends Application {
     public static int cheneidushu = 24;
     public static String  chewaidushu = "26";
     public static int fengliang = 1;
+    private Typeface typefaceB;
+    private Typeface typefaceC;
+    private Typeface typefaceM;
+    private Typeface typefaceR;
+
+    public static  CartoolApp getInstace() {
+        return _instance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        _instance = (CartoolApp) getApplicationContext();
         musicStatus = ConstantValue.STOP;
         mediaStatus = ConstantValue.STOP;
-
+        typefaceB = Typeface.createFromAsset(getAssets(), "fonts/BebasNeueBold.otf");
+        typefaceC = Typeface.createFromAsset(getAssets(), "fonts/CenturyGothic.TTF");
+        typefaceM = Typeface.createFromAsset(getAssets(), "fonts/FZLanTingHei-M-GBKRegular.ttf");
+        typefaceR = Typeface.createFromAsset(getAssets(), "fonts/FZLanTingHei-R-GBKRegular.TTF");
         initMusicList();
 
         /***
@@ -68,6 +83,38 @@ public class CartoolApp extends Application {
         }
     }
 
+
+    public Typeface getTypefaceR() {
+        return typefaceR;
+    }
+
+    public void setTypefaceR(Typeface typefaceR) {
+        this.typefaceR = typefaceR;
+    }
+
+    public Typeface getTypefaceB() {
+        return typefaceB;
+    }
+
+    public void setTypefaceB(Typeface typefaceB) {
+        this.typefaceB = typefaceB;
+    }
+
+    public Typeface getTypefaceC() {
+        return typefaceC;
+    }
+
+    public void setTypefaceC(Typeface typefaceC) {
+        this.typefaceC = typefaceC;
+    }
+
+    public Typeface getTypefaceM() {
+        return typefaceM;
+    }
+
+    public void setTypefaceM(Typeface typefaceM) {
+        this.typefaceM = typefaceM;
+    }
 
     public static String getMusicStatus() {
         return musicStatus;
