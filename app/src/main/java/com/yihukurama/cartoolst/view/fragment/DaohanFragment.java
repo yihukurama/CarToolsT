@@ -6,9 +6,11 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -61,6 +63,10 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     EditText mudidiView;
     float bilichi = 16;
     Button bianqianBtn;
+    Button bianqianBtn2;
+    Button bianqianBtn3;
+    Button bianqianBtn4;
+    Button bianqianBtn5;
     Button cjiaBtn;
     Button cjianBtn;
     Button dinweiBtn;
@@ -149,23 +155,56 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
         cjianBtn.setOnClickListener(this);
         bianqianBtn = (Button)view.findViewById(R.id.bianqian1);
         bianqianBtn.setOnClickListener(this);
+        bianqianBtn2 = (Button)view.findViewById(R.id.bianqian2);
+        bianqianBtn2.setOnClickListener(this);
+        bianqianBtn3 = (Button)view.findViewById(R.id.bianqian3);
+        bianqianBtn3.setOnClickListener(this);
+        bianqianBtn4 = (Button)view.findViewById(R.id.bianqian4);
+        bianqianBtn4.setOnClickListener(this);
+        bianqianBtn5 = (Button)view.findViewById(R.id.bianqian5);
+        bianqianBtn5.setOnClickListener(this);
         dinweiBtn = (Button)view.findViewById(R.id.dinwei);
         dinweiBtn.setOnClickListener(this);
 
-        mudidiView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mudidiView.setOnClickListener(this);
+        mudidiView.setOnTouchListener(new View.OnTouchListener() {
 
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				/*判断是否是“GO”键*/
-                Log.i(TAG,actionId+"输入法搜索id");
-                if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                //记住EditText的InputType现在是password
+                int inType = mudidiView.getInputType(); // backup the input type
+                mudidiView.setInputType(InputType.TYPE_NULL); // disable soft input
+                mudidiView.onTouchEvent(event); // call native handler
+                mudidiView.setInputType(inType); // restore input type
+                mudidiView.setSelection(mudidiView.getText().length());
+                return true;
 
-                    MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA);
-                    return true;
-                }
-                return false;
             }
         });
+
+        mudidiView.setOnFocusChangeListener(new android.view.View.OnFocusChangeListener() {
+
+            @Override
+
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if (hasFocus) {
+                    // 此处为得到焦点时的处理内容
+                    bianqianBtn.setVisibility(View.VISIBLE);
+                    bianqianBtn2.setVisibility(View.VISIBLE);
+                    bianqianBtn3.setVisibility(View.VISIBLE);
+                    bianqianBtn4.setVisibility(View.VISIBLE);
+                    bianqianBtn5.setVisibility(View.VISIBLE);
+
+                } else {
+                    // 此处为失去焦点时的处理内容
+
+                }
+
+            }
+
+        });
+
 
 
 
@@ -207,6 +246,18 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
             case R.id.bianqian1:
                 //播放视频
                 MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA);
+                break;
+            case R.id.bianqian2:
+                //播放视频
+                MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA2);
+                break;
+            case R.id.bianqian3:
+                //播放视频
+                MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA3);
+                break;
+            case R.id.bianqian4:
+                //播放视频
+                MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA4);
                 break;
             case R.id.cjia:
                 //放大地图

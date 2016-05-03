@@ -561,6 +561,9 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+
+
+
             return false;
         }
 

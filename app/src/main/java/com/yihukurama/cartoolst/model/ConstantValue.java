@@ -12,6 +12,11 @@ public class ConstantValue {
 
     public final static int UPDATESEEKBAR = 0;
 
-    public final static String DAOHANMEDIA = "广美车载项目-动效演示.mp4";
+    public final static String DAOHANMEDIA = "导航地址1.mp4";
+    public final static String DAOHANMEDIA2 = "导航地址2.mp4";
+    public final static String DAOHANMEDIA3= "导航地址3.mp4";
+    public final static String DAOHANMEDIA4 = "导航地址4.mp4";
+    public final static String DAOHANMEDIA5 = "导航输入框.mp4";
+//    public final static String TONGXUNMEDIA = "通讯.mp4";
     public final static String TONGXUNMEDIA = "广美车载项目-动效演示.mp4";
 }

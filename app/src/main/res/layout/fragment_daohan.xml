@@ -23,8 +23,8 @@
         android:layout_marginTop="12px">
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="655px"
+                android:layout_height="133px"
                 android:id="@+id/dizhi"
                 android:hint="想去哪儿"
                 android:drawableLeft="@drawable/mudidi_b"
@@ -39,26 +39,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/fujin"
+            android:visibility="gone"
             android:id="@+id/bianqian5" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bianqian1"
+            android:visibility="gone"
             android:background="@drawable/bianqian1selector"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bianqian2"
+            android:visibility="gone"
             android:background="@drawable/bianqian2selector"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bianqian3"
+            android:visibility="gone"
             android:background="@drawable/bianqian3selector"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bianqian4"
+            android:visibility="gone"
             android:background="@drawable/bianqian4selector"/>
     </LinearLayout>
 
