@@ -199,5 +199,34 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="1920px"
+        android:layout_height="720px"
+        android:background="@drawable/background1"
+        android:id="@+id/background1"
+        android:visibility="gone">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="848px"
+            android:layout_marginTop="124px">
+            <com.yihukurama.cartoolst.view.widget.MPingFangFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="音量"
+                android:layout_gravity="center_horizontal"
+                style="@style/f60"/>
+            <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
+                android:id="@+id/value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="76"
+                android:layout_gravity="center_horizontal"
+                style="@style/b288"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
 </RelativeLayout>

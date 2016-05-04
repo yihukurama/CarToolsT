@@ -130,4 +130,15 @@
     </style>
 
 
+    <style name="b288">
+
+        <item name="android:textSize">288px</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="f60">
+
+        <item name="android:textSize">60px</item>
+        <item name="android:textColor">#ABB0BE</item>
+    </style>
 </resources>

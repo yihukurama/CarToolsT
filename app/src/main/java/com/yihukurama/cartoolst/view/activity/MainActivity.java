@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -25,8 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.BaiduMapOptions;
-import com.baidu.mapapi.map.MapStatus;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.yihukurama.cartoolst.R;
 import com.yihukurama.cartoolst.controler.AnimationManager;
@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     public String currentFragment = "shushi";
     final String secoundMenu1[] ={"空调","车锁","时间","单位","语言"};
     final String secoundMenu2[] ={"音乐","视频","时间","电视","浏览器"};
+    RelativeLayout background1;
+    TextView value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         image1 = (ImageView)findViewById(R.id.imageleft);
         connectTV = (TextView)findViewById(R.id.connect);
         cheneiwendu = (TextView)findViewById(R.id.cheneiwendu);
+        background1 = (RelativeLayout)findViewById(R.id.background1);
+        value = (TextView)findViewById(R.id.value);
         connectTV.setOnClickListener(this);
         setDefaultFragment();
         initSlidMenu();
@@ -146,6 +150,9 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         Intent intentPlay = new Intent(context,MediaService.class);
         intentPlay.putExtra("cmd", "");
         startService(intentPlay);
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        mMaxVolume = mAudioManager
+                .getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         bcs = new BluetoothCS("C0:EE:FB:46:90:33",LinkDetectedHandler);
         time2.setText(Utils.getTimeDate());
         time3.setText(Utils.getWeekDate());
@@ -167,8 +174,10 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                         eX = event.getX();
                         eY = event.getY();
                         Log.i(TAG, "单点up");
+                        endGesture();
                         break;
                     case MotionEvent.ACTION_POINTER_UP:
+
                         break;
                     case MotionEvent.ACTION_POINTER_DOWN:
                         mode += 1;
@@ -193,6 +202,23 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     }
 
 
+    /** 定时隐藏 */
+    private Handler mDismissHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            background1.setVisibility(View.GONE);
+        }
+    };
+
+    /** 手势结束 */
+    private void endGesture() {
+        mVolume = -1;
+
+        // 隐藏
+        mDismissHandler.removeMessages(0);
+        mDismissHandler.sendEmptyMessageDelayed(0, 500);
+        Log.i(TAG,"结束手势");
+    }
 
     private void initSlidMenu() {
         menu = new SlidingMenu(this);
@@ -542,6 +568,40 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+
+
+    /**
+     * 滑动改变声音大小
+     *
+     * @param percent
+     */
+    /** 最大声音 */
+    private int mMaxVolume;
+    /** 当前声音 */
+    private int mVolume = -1;
+    private AudioManager mAudioManager;
+    private void onVolumeSlide(float percent) {
+        if (mVolume == -1) {
+            mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            if (mVolume < 0)
+                mVolume = 0;
+
+            // 显示
+            background1.setVisibility(View.VISIBLE);
+        }
+
+        int index = (int) (percent * mMaxVolume) + mVolume;
+        if (index > mMaxVolume)
+            index = mMaxVolume;
+        else if (index < 0)
+            index = 0;
+
+        // 变更声音
+        value.setText(index+"");
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
+        Log.i(TAG,"调节音量");
+    }
+
     class MyGesture implements GestureDetector.OnGestureListener{
 
         @Override
@@ -561,6 +621,20 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            float mOldX = e1.getX(), mOldY = e1.getY();
+            int y = (int) e2.getRawY();
+            int x = (int) e2.getRawX();
+            Display disp = getWindowManager().getDefaultDisplay();
+            int windowHeight = disp.getHeight();
+
+            moveX = mOldX - x;
+            moveY = mOldY - y;
+
+            if (Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>50){
+                onVolumeSlide((mOldY - y) / windowHeight);
+            }
+
+
 
 
 
@@ -583,28 +657,28 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             if(Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>50){//上下滑动
                 if(moveY<0){
                     Log.i(TAG, "上滑" + mode);
-                    if(currentFragment.equals("shushi")||currentFragment.equals("duomeiti")){
-                        showDuomeiTiMenu();
-                    }
+
                     if(mode == 1){
                         showShortToast("oneup");
 
                     }else if(mode == 2){
-
+                        if(currentFragment.equals("shushi")||currentFragment.equals("duomeiti")){
+                            showDuomeiTiMenu();
+                        }
                     }else{
                         showShortToast("threeup");
                     }
                 }else{
                     Log.i(TAG,"下滑"+mode);
 
-                    if(currentFragment.equals("shushi")||currentFragment.equals("duomeiti")){
-                        hideDuomeiTiMenu();
-                    }
+
 
                     if(mode == 1){
 
                     }else if(mode == 2){
-
+                        if(currentFragment.equals("shushi")||currentFragment.equals("duomeiti")){
+                            hideDuomeiTiMenu();
+                        }
 
                     }else{
                     }
