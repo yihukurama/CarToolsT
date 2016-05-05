@@ -190,11 +190,7 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
 
                 if (hasFocus) {
                     // 此处为得到焦点时的处理内容
-                    bianqianBtn.setVisibility(View.VISIBLE);
-                    bianqianBtn2.setVisibility(View.VISIBLE);
-                    bianqianBtn3.setVisibility(View.VISIBLE);
-                    bianqianBtn4.setVisibility(View.VISIBLE);
-                    bianqianBtn5.setVisibility(View.VISIBLE);
+
 
                 } else {
                     // 此处为失去焦点时的处理内容
