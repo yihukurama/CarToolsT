@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
         SDKInitializer.initialize(getApplicationContext());
+//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
         setContentView(R.layout.activity_main);
         prepare();
         initView();
@@ -445,6 +446,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 float precent= 0f;
                 if(sub.length>1){
                     precent =Float.parseFloat(sub[1]);
+                    mes = sub[0];
                 }
 
                 switch (mes){
@@ -521,8 +523,12 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                         onWenduSlide(precent);
                         break;
                     case Command.EXIT:
-                        bcs.shutdownServer();
-                        bcs.shutdownServer();
+                        try{
+                            bcs.shutdownServer();
+                        }catch (Exception e){
+
+                        }
+
                         bcs.startServer();
                         break;
                     default:
@@ -537,6 +543,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                     connectTV.setBackground(context.getDrawable(R.drawable.lianjiezhong));
                 }else if(remes.contains("已连接")){
                     connectTV.setBackground(context.getDrawable(R.drawable.yilianjie));
+
+                    bcs.sendMessageHandle(Command.DANGQIANWENDU+CartoolApp.cheneidushu);
                 }
 
             }
