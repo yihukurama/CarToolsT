@@ -215,6 +215,7 @@
             <com.yihukurama.cartoolst.view.widget.MPingFangFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/valuename"
                 android:text="音量"
                 android:layout_gravity="center_horizontal"
                 style="@style/f60"/>

@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     final String secoundMenu2[] ={"音乐","视频","时间","电视","浏览器"};
     RelativeLayout background1;
     TextView value;
+    TextView valueName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         cheneiwendu = (TextView)findViewById(R.id.cheneiwendu);
         background1 = (RelativeLayout)findViewById(R.id.background1);
         value = (TextView)findViewById(R.id.value);
+        valueName = (TextView)findViewById(R.id.valuename);
         connectTV.setOnClickListener(this);
         setDefaultFragment();
         initSlidMenu();
@@ -596,6 +598,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 mVolume = 0;
 
             // 显示
+            valueName.setText("音量");
             background1.setVisibility(View.VISIBLE);
         }
 
@@ -608,6 +611,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
         int showValue = (int)((float)(Math.round(index/15.00*100))/100*100);
         // 变更声音
+        valueName.setText("音量");
         value.setText(showValue+"");
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
         Log.i(TAG,"调节音量");
@@ -619,6 +623,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 mVolume = 16;
 
             // 显示
+        valueName.setText("温度");
             background1.setVisibility(View.VISIBLE);
 
         int index =  (int)(percent * 30) + currentwendu;
