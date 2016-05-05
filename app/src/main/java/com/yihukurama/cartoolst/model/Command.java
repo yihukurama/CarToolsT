@@ -11,13 +11,24 @@ public class Command {
     public static final String SKIPTONGXUN = "4";
     public static final String SKIPFUWU = "5";
 
-    public static final String THREEUP = "6";
+    public static final String THREEUP = "6:precent";
     public static final String TWOUP = "7";
     public static final String SAVEADDRESS = "8";
     public static final String EXIT = "9";
-    public static final String THREEDOWN = "10";
+    public static final String THREEDOWN = "10:precent";
     public static final String TWODOWN = "11";
 
     public static final String TWOLEFT = "12";
     public static final String TWORIGHT = "13";
+
+
+
+    public static final String PLAYVIDEO1 = "14";
+    public static final String PLAYVIDEO2 = "15";
+    public static final String PLAYVIDEO3 = "16";
+    public static final String PLAYVIDEO4 = "17";
+    public static final String PLAYVIDEO5 = "18";
+
+    public static final String THREELEFT = "19:precent";
+    public static final String THREERIGHT = "20:precent";
 }

@@ -441,6 +441,12 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 String mes = (String)msg.obj;
                 Log.i(TAG, "client" + mes);
                 connectTV.setText("手机信息：" + mes);
+                String sub[] = mes.split(":");
+                float precent= 0f;
+                if(sub.length>1){
+                    precent =Float.parseFloat(sub[1]);
+                }
+
                 switch (mes){
                     case Command.SKIPDUOMEITI:
                         if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
@@ -503,12 +509,16 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                         }
                         break;
                     case Command.THREEUP:
-                        float precent1 = mVolume/mMaxVolume;
-                        onVolumeSlide(precent1++);
+                        onVolumeSlide(precent);
                         break;
                     case Command.THREEDOWN:
-                        float precent2 = mVolume/mMaxVolume;
-                        onVolumeSlide(precent2--);
+                        onVolumeSlide(precent);
+                        break;
+                    case Command.THREELEFT:
+                        onWenduSlide(precent);
+                        break;
+                    case Command.THREERIGHT:
+                        onWenduSlide(precent);
                         break;
                     case Command.EXIT:
                         bcs.shutdownServer();
@@ -716,10 +726,15 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                     if(mode == 1){
 
                     }else if(mode == 2){
+
+                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
+                            menu.toggle();
+                        }
                         if(currentFragment.equals("shushi")||currentFragment.equals("duomeiti")){
                             hideDuomeiTiMenu();
+                        }else if (!isShowDaohan){
+                            transDaohan();
                         }
-
                     }else{
                     }
                 }
