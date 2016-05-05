@@ -499,6 +499,14 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                             transDaohan();
                         }
                         break;
+                    case Command.THREEUP:
+                        float precent1 = mVolume/mMaxVolume;
+                        onVolumeSlide(precent1++);
+                        break;
+                    case Command.THREEDOWN:
+                        float precent2 = mVolume/mMaxVolume;
+                        onVolumeSlide(precent2--);
+                        break;
                     case Command.EXIT:
                         bcs.shutdownServer();
                         bcs.shutdownServer();
@@ -590,14 +598,16 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             background1.setVisibility(View.VISIBLE);
         }
 
-        int index = (int) (percent * mMaxVolume) + mVolume;
+        int index =  (int)(percent * mMaxVolume) + mVolume;
         if (index > mMaxVolume)
             index = mMaxVolume;
         else if (index < 0)
             index = 0;
 
+
+        int showValue = (int)((float)(Math.round(index/15.00*100))/100*100);
         // 变更声音
-        value.setText(index+"");
+        value.setText(showValue+"");
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
         Log.i(TAG,"调节音量");
     }
