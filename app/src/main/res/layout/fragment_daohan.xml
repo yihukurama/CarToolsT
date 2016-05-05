@@ -105,6 +105,28 @@
     </LinearLayout>
 
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/zuoshang"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/youxia"
+        android:layout_alignBottom="@id/bmapView"
+        android:layout_alignParentEnd="true" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/zuoxia"
+        android:layout_alignBottom="@id/bmapView"
+        android:layout_alignParentBottom="false" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/youshang"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
 
 

@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.yihukurama.cartoolst.CartoolApp;
 import com.yihukurama.cartoolst.R;
 import com.yihukurama.cartoolst.controler.AnimationManager;
 import com.yihukurama.cartoolst.controler.MediaManager;
@@ -612,6 +613,29 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         Log.i(TAG,"调节音量");
     }
 
+    private void onWenduSlide(float percent) {
+        int currentwendu = CartoolApp.cheneidushu;
+            if (currentwendu < 16)
+                mVolume = 16;
+
+            // 显示
+            background1.setVisibility(View.VISIBLE);
+
+        int index =  (int)(percent * 30) + currentwendu;
+        if (index > 30)
+            index = 30;
+        else if (index < 0)
+            index = 0;
+
+
+        // 变更声音
+        value.setText(index + "");
+        CartoolApp.cheneidushu = index;
+        cheneiwendu.setText(CartoolApp.cheneidushu+"");
+        Log.i(TAG,"调节温度");
+    }
+
+
     class MyGesture implements GestureDetector.OnGestureListener{
 
         @Override
@@ -641,7 +665,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             moveY = mOldY - y;
 
             if (Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>50){
-                onVolumeSlide((mOldY - y) / windowHeight);
+//                onVolumeSlide((mOldY - y) / windowHeight);
+                onWenduSlide((mOldY - y) / windowHeight);
             }
 
 
