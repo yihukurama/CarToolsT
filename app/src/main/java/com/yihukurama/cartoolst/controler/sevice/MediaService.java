@@ -64,9 +64,9 @@ public class MediaService extends Service {
                     public void run() {
 
 
-                        while(nowSeekBar < maxSeekBar ){
+                        while(nowSeekBar < maxSeekBar){
 
-                            if(mp.isPlaying()){
+                            if(CartoolApp.getMusicStatus() != ConstantValue.STOP && mp.isPlaying()){
                                 nowSeekBar = mp.getCurrentPosition();
                                 currentMusic.setProgress(nowSeekBar);
                                 updateMusicProgress();

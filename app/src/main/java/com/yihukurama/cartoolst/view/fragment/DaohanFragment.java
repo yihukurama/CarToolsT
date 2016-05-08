@@ -182,30 +182,6 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-        mudidiView.setOnFocusChangeListener(new android.view.View.OnFocusChangeListener() {
-
-            @Override
-
-            public void onFocusChange(View v, boolean hasFocus) {
-
-                if (hasFocus) {
-                    // 此处为得到焦点时的处理内容
-
-
-                } else {
-                    // 此处为失去焦点时的处理内容
-
-                }
-
-            }
-
-        });
-
-
-
-
-
-
 
     }
 
@@ -254,6 +230,10 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
             case R.id.bianqian4:
                 //播放视频
                 MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA4);
+                break;
+            case R.id.dizhi:
+                //播放视频
+                MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA5);
                 break;
             case R.id.cjia:
                 //放大地图

@@ -163,18 +163,21 @@ public class BluetoothCS {
                 msg.what = 0;
                 LinkDetectedHandler.sendMessage(msg);
 
-				/* 接受客户端的连接请求 */
-                socket = mserverSocket.accept();
-                Log.d("server", "accept success !");
+                while (mBluetoothAdapter.getState() != mBluetoothAdapter.STATE_CONNECTED) {
+                    /* 接受客户端的连接请求 */
+                    socket = mserverSocket.accept();
+                    Log.d("server", "accept success !");
 
-                Message msg2 = new Message();
-                String info = "已连接，点击可断开重连。";
-                msg2.obj = info;
-                msg.what = 0;
-                LinkDetectedHandler.sendMessage(msg2);
-                //启动接受数据
-                mreadThread = new readThread();
-                mreadThread.start();
+                    Message msg2 = new Message();
+                    String info = "已连接，点击可断开重连。";
+                    msg2.obj = info;
+                    msg.what = 0;
+                    LinkDetectedHandler.sendMessage(msg2);
+                    //启动接受数据
+                    mreadThread = new readThread();
+                    mreadThread.start();
+                }
+
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

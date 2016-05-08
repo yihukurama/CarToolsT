@@ -177,8 +177,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                     case MotionEvent.ACTION_UP:
                         eX = event.getX();
                         eY = event.getY();
-                        Log.i(TAG, "单点up");
                         endGesture();
+                        Log.i(TAG, "单点up");
                         break;
                     case MotionEvent.ACTION_POINTER_UP:
 
@@ -203,25 +203,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 return gestureDetector.onTouchEvent(event);
             }
         });
-    }
 
-
-    /** 定时隐藏 */
-    private Handler mDismissHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            background1.setVisibility(View.GONE);
-        }
-    };
-
-    /** 手势结束 */
-    private void endGesture() {
-        mVolume = -1;
-
-        // 隐藏
-        mDismissHandler.removeMessages(0);
-        mDismissHandler.sendEmptyMessageDelayed(0, 500);
-        Log.i(TAG,"结束手势");
+        bcs.startServer();
     }
 
     private void initSlidMenu() {
@@ -441,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             {
                 String mes = (String)msg.obj;
                 Log.i(TAG, "client" + mes);
-                connectTV.setText("手机信息：" + mes);
+//                connectTV.setText("手机信息：" + mes);
                 String sub[] = mes.split(":");
                 float precent= 0f;
                 if(sub.length>1){
@@ -450,86 +433,49 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 }
 
                 switch (mes){
-                    case Command.SKIPDUOMEITI:
-                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
-                            menu.toggle();
-                        }
-                        transDuomeiti();
-                        break;
-                    case Command.SKIPDAOHAN:
-                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
-                        menu.toggle();
-                         }
-                        transDaohan();
-                        break;
-                    case Command.SKIPDIANTAI:
-                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
-                        menu.toggle();
-                         }
-                        transDiantai();
-                        break;
-                    case Command.SKIPSHUSHI:
-                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
-                            menu.toggle();
-                         }
-                        transShushi();
-                        break;
-                    case Command.SKIPTONGXUN:
-                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
-                            menu.toggle();
-                        }
-                        transTongxun();
-                        break;
-                    case Command.TWOLEFT:
-                        if(menu.isMenuShowing() && !menu.isSecondaryMenuShowing()){
-                            menu.toggle();
-                        }else if(!menu.isSecondaryMenuShowing()){
-                            menu.showSecondaryMenu();
-                        }
-
-                        break;
-                    case Command.TWORIGHT:
-                        if(menu.isSecondaryMenuShowing()){
-                            menu.toggle();
-                        }else if(!menu.isMenuShowing()){
-                            menu.showMenu();
-                        }
-                        break;
-                    case Command.TWOUP:
-                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
-                            menu.toggle();
-                        }
-                        break;
-                    case Command.TWODOWN:
-                        if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
-                            menu.toggle();
-                        }
-                        if (isShowDaohan){
-
-                        }else{
-                            transDaohan();
-                        }
-                        break;
-                    case Command.THREEUP:
+                    case Command.YINLIANG:
                         onVolumeSlide(precent);
                         break;
-                    case Command.THREEDOWN:
-                        onVolumeSlide(precent);
+
+                    case Command.WENDUJIA:
+                        CartoolApp.cheneidushu++;
+                        int wendu = CartoolApp.cheneidushu;
+                        if(wendu<16){
+                            wendu = 16;
+                         }else if(wendu>30){
+                            wendu = 30;
+                        }
+                        valueName.setText("温度");
+                        background1.setVisibility(View.VISIBLE);
+                        value.setText(wendu+"");
+                        cheneiwendu.setText(wendu + "");
                         break;
-                    case Command.THREELEFT:
-                        onWenduSlide(precent);
+                    case Command.WENDUJIAN:
+                        CartoolApp.cheneidushu--;
+                        int wenduj = CartoolApp.cheneidushu;
+                        if(wenduj<16){
+                            wenduj = 16;
+                        }else if(wenduj>30){
+                            wenduj = 30;
+                        }
+                        valueName.setText("温度");
+                        background1.setVisibility(View.VISIBLE);
+                        value.setText(wenduj+"");
+                        cheneiwendu.setText(wenduj + "");
                         break;
-                    case Command.THREERIGHT:
-                        onWenduSlide(precent);
+                    case Command.SAVEADDRESS:
+
                         break;
+
                     case Command.EXIT:
                         try{
                             bcs.shutdownServer();
                         }catch (Exception e){
 
                         }
-
-                        bcs.startServer();
+                        break;
+                    case Command.ENDGESTURE:
+                        endGesture();
                         break;
                     default:
                         break;
@@ -540,11 +486,11 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 String remes = (String)msg.obj;
                 Log.i(TAG, "server" + remes);
                 if(remes.contains("正在连接平板")){
-                    connectTV.setBackground(context.getDrawable(R.drawable.lianjiezhong));
+                    connectTV.setBackground(CartoolApp.getInstace().getResources().getDrawable(R.drawable.lianjiezhong));
                 }else if(remes.contains("已连接")){
-                    connectTV.setBackground(context.getDrawable(R.drawable.yilianjie));
+                    connectTV.setBackground(CartoolApp.getInstace().getResources().getDrawable(R.drawable.yilianjie));
 
-                    bcs.sendMessageHandle(Command.DANGQIANWENDU+CartoolApp.cheneidushu);
+                    bcs.sendMessageHandle(Command.DANGQIANWENDU + CartoolApp.cheneidushu);
                 }
 
             }
@@ -597,7 +543,23 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    /** 定时隐藏 */
+    private Handler mDismissHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            background1.setVisibility(View.GONE);
+        }
+    };
 
+    /** 手势结束 */
+    private void endGesture() {
+        mVolume = -1;
+
+        // 隐藏
+        mDismissHandler.removeMessages(0);
+        mDismissHandler.sendEmptyMessageDelayed(0, 500);
+        Log.i(TAG,"结束手势");
+    }
 
     /**
      * 滑动改变声音大小
@@ -627,7 +589,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             index = 0;
 
 
-        int showValue = (int)((float)(Math.round(index/15.00*100))/100*100);
+        int showValue = (int)((float)(Math.round(index/15.00 * 100))/100*100);
         // 变更声音
         valueName.setText("音量");
         value.setText(showValue+"");
@@ -643,18 +605,17 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             // 显示
         valueName.setText("温度");
             background1.setVisibility(View.VISIBLE);
-
-        int index =  (int)(percent * 30) + currentwendu;
+        int index =  (int)(percent * 10) + currentwendu;
         if (index > 30)
             index = 30;
         else if (index < 0)
-            index = 0;
+            index = 16;
 
 
         // 变更声音
         value.setText(index + "");
         CartoolApp.cheneidushu = index;
-        cheneiwendu.setText(CartoolApp.cheneidushu+"");
+        cheneiwendu.setText(CartoolApp.cheneidushu + "");
         Log.i(TAG,"调节温度");
     }
 
@@ -688,8 +649,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             moveY = mOldY - y;
 
             if (Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>50){
-//                onVolumeSlide((mOldY - y) / windowHeight);
-                onWenduSlide((mOldY - y) / windowHeight);
+                onVolumeSlide((mOldY - y) / windowHeight);
             }
 
 
