@@ -18,6 +18,7 @@ import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -83,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     RelativeLayout background1;
     TextView value;
     TextView valueName;
+    Button close;
+    RelativeLayout shipinDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +134,9 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         background1 = (RelativeLayout)findViewById(R.id.background1);
         value = (TextView)findViewById(R.id.value);
         valueName = (TextView)findViewById(R.id.valuename);
+        close = (Button)findViewById(R.id.close);
+        close.setOnClickListener(this);
+        shipinDialog = (RelativeLayout)findViewById(R.id.shipindialog);
         connectTV.setOnClickListener(this);
         setDefaultFragment();
         initSlidMenu();
@@ -278,6 +284,9 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
                 }
                 bcs.startServer();
+                break;
+            case R.id.close:
+                shipinDialog.setVisibility(View.GONE);
                 break;
             default:
                 break;

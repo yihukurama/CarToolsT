@@ -239,8 +239,11 @@
         android:visibility="gone">
 
         <Button
+            android:layout_marginTop="60px"
+            android:layout_marginLeft="60px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/close"
             android:background="@drawable/close"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -248,7 +251,7 @@
             android:orientation="vertical"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="153px">
-            <com.yihukurama.cartoolst.view.widget.MPingFangFontTextView
+            <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tips"
@@ -261,7 +264,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="47px"
                 android:id="@+id/tips2"
-                android:text=""
+                android:text="广州美术学院（昌岗校区）"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#9B9B9B"
                 android:textSize="48px"/>
@@ -271,6 +274,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="113px"
                     android:background="@drawable/quedin"
+                    android:id="@+id/quedin"
                     android:layout_gravity="center_horizontal"/>
 
 
