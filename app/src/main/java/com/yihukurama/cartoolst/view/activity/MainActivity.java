@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     ImageButton menudaohang;
     ImageButton menudiantai;
     ImageButton menucall ;
-    boolean isShowDaohan = true;
+    boolean isShowDaohan = false;
     TextView time1;
     TextView time2;
     TextView time3;
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     TextView value;
     TextView valueName;
     Button close;
+    Button quedin;
     RelativeLayout shipinDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         valueName = (TextView)findViewById(R.id.valuename);
         close = (Button)findViewById(R.id.close);
         close.setOnClickListener(this);
+        quedin = (Button)findViewById(R.id.quedin);
+        quedin.setOnClickListener(this);
         shipinDialog = (RelativeLayout)findViewById(R.id.shipindialog);
         connectTV.setOnClickListener(this);
         setDefaultFragment();
@@ -211,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         });
 
         bcs.startServer();
+        connectTV.setBackground(CartoolApp.getInstace().getResources().getDrawable(R.drawable.dengdai));
     }
 
     private void initSlidMenu() {
@@ -276,16 +280,20 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 menu.toggle();
                 MediaManager.playDefault(context, ConstantValue.TONGXUNMEDIA);
                 break;
-            case R.id.connect://开启蓝牙服务端
-
-                try{
-                    bcs.shutdownServer();
-                }catch (Exception e){
-
-                }
-                bcs.startServer();
-                break;
+//            case R.id.connect://开启蓝牙服务端
+//
+//                try{
+//                    bcs.shutdownServer();
+//                }catch (Exception e){
+//
+//                }
+//                bcs.startServer();
+//                break;
             case R.id.close:
+                shipinDialog.setVisibility(View.GONE);
+                break;
+            case R.id.quedin:
+                MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA6);
                 shipinDialog.setVisibility(View.GONE);
                 break;
             default:
@@ -331,18 +339,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
         setSecMenu();
         isShowDaohan = false;
     }
-    private void transTongxun(){
-        hideDuomeiTiMenu();
-        transaction = fm.beginTransaction();
-        if (callFragment == null) {
-            callFragment = new CallFragment();
-        }
-        // 使用当前Fragment的布局替代id_content的控件
-        transaction.replace(R.id.showingfragment, callFragment);
-        transaction.commit();
-        currentFragment = "tongxun";
-        isShowDaohan = false;
-    }
+
     private void transDaohan(){
         hideDuomeiTiMenu();
         transaction = fm.beginTransaction();
@@ -473,7 +470,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                         cheneiwendu.setText(wenduj + "");
                         break;
                     case Command.SAVEADDRESS:
-
+                        shipinDialog.setVisibility(View.VISIBLE);
                         break;
 
                     case Command.EXIT:
@@ -581,51 +578,14 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     private int mVolume = -1;
     private AudioManager mAudioManager;
     private void onVolumeSlide(float percent) {
-        if (mVolume == -1) {
-            mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-            if (mVolume < 0)
-                mVolume = 0;
-
-            // 显示
-            valueName.setText("音量");
-            background1.setVisibility(View.VISIBLE);
-        }
-
-        int index =  (int)(percent * mMaxVolume) + mVolume;
-        if (index > mMaxVolume)
-            index = mMaxVolume;
-        else if (index < 0)
-            index = 0;
-
-
-        int showValue = (int)((float)(Math.round(index/15.00 * 100))/100*100);
+        valueName.setText("温度");
+        background1.setVisibility(View.VISIBLE);
+        int index = (int)(percent/100*15f);
         // 变更声音
         valueName.setText("音量");
-        value.setText(showValue+"");
+        value.setText(((int)percent)+"");
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
         Log.i(TAG,"调节音量");
-    }
-
-    private void onWenduSlide(float percent) {
-        int currentwendu = CartoolApp.cheneidushu;
-            if (currentwendu < 16)
-                mVolume = 16;
-
-            // 显示
-        valueName.setText("温度");
-            background1.setVisibility(View.VISIBLE);
-        int index =  (int)(percent * 10) + currentwendu;
-        if (index > 30)
-            index = 30;
-        else if (index < 0)
-            index = 16;
-
-
-        // 变更声音
-        value.setText(index + "");
-        CartoolApp.cheneidushu = index;
-        cheneiwendu.setText(CartoolApp.cheneidushu + "");
-        Log.i(TAG,"调节温度");
     }
 
 
@@ -648,22 +608,6 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            float mOldX = e1.getX(), mOldY = e1.getY();
-            int y = (int) e2.getRawY();
-            int x = (int) e2.getRawX();
-            Display disp = getWindowManager().getDefaultDisplay();
-            int windowHeight = disp.getHeight();
-
-            moveX = mOldX - x;
-            moveY = mOldY - y;
-
-            if (Math.abs(moveX)<Math.abs(moveY) && Math.abs(moveY)>50){
-                onVolumeSlide((mOldY - y) / windowHeight);
-            }
-
-
-
-
 
             return false;
         }
@@ -707,7 +651,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                         if(menu.isMenuShowing() || menu.isSecondaryMenuShowing()){
                             menu.toggle();
                         }
-                        if(currentFragment.equals("shushi")||currentFragment.equals("duomeiti")){
+                        if(isShowSecoundMenu){
                             hideDuomeiTiMenu();
                         }else if (!isShowDaohan){
                             transDaohan();

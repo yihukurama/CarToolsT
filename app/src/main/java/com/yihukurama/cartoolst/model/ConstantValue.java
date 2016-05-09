@@ -17,5 +17,7 @@ public class ConstantValue {
     public final static String DAOHANMEDIA3= "导航地址3.mp4";
     public final static String DAOHANMEDIA4 = "导航地址4.mp4";
     public final static String DAOHANMEDIA5 = "导航输入地址.mp4";
+    public final static String DAOHANMEDIA6 = "手机导航保存地址后的中控.mp4";
     public final static String TONGXUNMEDIA = "通讯.mp4";
+
 }

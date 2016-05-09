@@ -14,5 +14,4 @@ public class Command {
 
     public static final String DANGQIANWENDU = "21";//把当前温度发给手机
     public static final String ENDGESTURE = "22";
-    public static final String DANGQIANYINLIANG = "23";//把当前音量发给手机
 }
