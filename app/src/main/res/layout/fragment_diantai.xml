@@ -61,7 +61,6 @@
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="611px"
                         android:layout_height="123px"
-                        android:maxHeight="121.5px"
                         android:layout_marginLeft="1px"
                         android:layout_marginRight="1px"
                         android:background="@drawable/pinduan"

@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             }
         });
 
-//        bcs.startServer();
+        bcs.startServer();
         connectTV.setBackground(CartoolApp.getInstace().getResources().getDrawable(R.drawable.dengdai));
     }
 
@@ -448,7 +448,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                         valueName.setText("温度");
                         background1.setVisibility(View.VISIBLE);
                         value.setText(sub[1]);
-                        cheneiwendu.setText(sub[1]);
+                        cheneiwendu.setText(sub[1]+" ");
                         if(shushiFragment!=null) shushiFragment.kongtiao.setText(sub[1]);
                         endGesture();
                         break;
@@ -457,7 +457,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                         valueName.setText("温度");
                         background1.setVisibility(View.VISIBLE);
                         value.setText(sub[1]);
-                        cheneiwendu.setText(sub[1]);
+                        cheneiwendu.setText(sub[1]+" ");
                         if(shushiFragment!=null) shushiFragment.kongtiao.setText(sub[1]);
                         endGesture();
                         break;

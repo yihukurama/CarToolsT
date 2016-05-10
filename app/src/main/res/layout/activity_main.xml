@@ -109,10 +109,10 @@
             android:layout_height="640px"
             android:orientation="vertical"
             android:layout_toStartOf="@+id/imageright"
-            android:layout_marginRight="40px"
+            android:layout_marginRight="50px"
             android:layout_centerVertical="true">
 
-            <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
+            <com.yihukurama.cartoolst.view.widget.CentryTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/hourstime"
@@ -210,6 +210,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_centerHorizontal="true"
             android:layout_marginLeft="848px"
             android:layout_marginTop="124px">
             <com.yihukurama.cartoolst.view.widget.MPingFangFontTextView
@@ -243,6 +244,7 @@
             android:layout_marginLeft="60px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:id="@+id/close"
             android:background="@drawable/close"/>
         <LinearLayout
