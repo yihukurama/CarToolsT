@@ -43,7 +43,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/kongtiao"
-                        android:text="24"
+                        android:text="25"
                         style="@style/B100B" />
                     <ImageView
                         android:layout_width="wrap_content"

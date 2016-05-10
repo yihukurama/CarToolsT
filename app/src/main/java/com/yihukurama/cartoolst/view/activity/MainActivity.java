@@ -13,7 +13,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Display;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -432,42 +431,35 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
                 Log.i(TAG, "client" + mes);
 //                connectTV.setText("手机信息：" + mes);
                 String sub[] = mes.split(":");
-                float precent= 0f;
+                int precent= 0;
                 if(sub.length>1){
-                    precent =Float.parseFloat(sub[1]);
+                    precent =Integer.parseInt(sub[sub.length-1]);
                     mes = sub[0];
                 }
 
                 switch (mes){
                     case Command.YINLIANG:
                         onVolumeSlide(precent);
+                        endGesture();
                         break;
 
                     case Command.WENDUJIA:
-                        CartoolApp.cheneidushu++;
-                        int wendu = CartoolApp.cheneidushu;
-                        if(wendu<16){
-                            wendu = 16;
-                         }else if(wendu>30){
-                            wendu = 30;
-                        }
+                        CartoolApp.cheneidushu = precent;
                         valueName.setText("温度");
                         background1.setVisibility(View.VISIBLE);
-                        value.setText(wendu+"");
-                        cheneiwendu.setText(wendu + "");
+                        value.setText(sub[1]);
+                        cheneiwendu.setText(sub[1]);
+                        if(shushiFragment!=null) shushiFragment.kongtiao.setText(sub[1]);
+                        endGesture();
                         break;
                     case Command.WENDUJIAN:
-                        CartoolApp.cheneidushu--;
-                        int wenduj = CartoolApp.cheneidushu;
-                        if(wenduj<16){
-                            wenduj = 16;
-                        }else if(wenduj>30){
-                            wenduj = 30;
-                        }
+                        CartoolApp.cheneidushu = precent;
                         valueName.setText("温度");
                         background1.setVisibility(View.VISIBLE);
-                        value.setText(wenduj+"");
-                        cheneiwendu.setText(wenduj + "");
+                        value.setText(sub[1]);
+                        cheneiwendu.setText(sub[1]);
+                        if(shushiFragment!=null) shushiFragment.kongtiao.setText(sub[1]);
+                        endGesture();
                         break;
                     case Command.SAVEADDRESS:
                         shipinDialog.setVisibility(View.VISIBLE);
@@ -563,7 +555,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
 
         // 隐藏
         mDismissHandler.removeMessages(0);
-        mDismissHandler.sendEmptyMessageDelayed(0, 500);
+        mDismissHandler.sendEmptyMessageDelayed(0, 1000);
         Log.i(TAG,"结束手势");
     }
 
@@ -577,13 +569,13 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
     /** 当前声音 */
     private int mVolume = -1;
     private AudioManager mAudioManager;
-    private void onVolumeSlide(float percent) {
+    private void onVolumeSlide(int percent) {
         valueName.setText("温度");
         background1.setVisibility(View.VISIBLE);
-        int index = (int)(percent/100*15f);
+        int index = (int)(percent/100f*15);
         // 变更声音
         valueName.setText("音量");
-        value.setText(((int)percent)+"");
+        value.setText(percent+"");
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
         Log.i(TAG,"调节音量");
     }

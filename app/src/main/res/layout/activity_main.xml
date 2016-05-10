@@ -180,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/cheneiwendu"
-                    android:text="24 "
+                    android:text="25 "
                     style="@style/C36b"/>
 
                 <ImageView

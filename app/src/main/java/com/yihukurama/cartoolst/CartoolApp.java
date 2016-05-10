@@ -28,7 +28,7 @@ public class CartoolApp extends Application {
     public static ObjectAnimator cdAnimation = null;
     public LocationService locationService;
     public Vibrator mVibrator;
-    public static int cheneidushu = 24;
+    public static int cheneidushu = 25;
     public static String  chewaidushu = "26";
     public static int fengliang = 1;
     private Typeface typefaceB;

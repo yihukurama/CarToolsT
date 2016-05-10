@@ -42,7 +42,7 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     Button fengxiangqian;
     Button fengxiangxia;
     TextView fengli;
-    TextView kongtiao;
+    public TextView kongtiao;
     View v;
     MainActivity activity;
     public ShushiFragment() {
