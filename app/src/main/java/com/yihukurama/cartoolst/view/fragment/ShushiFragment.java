@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yihukurama.cartoolst.CartoolApp;
@@ -44,7 +45,9 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
     TextView fengli;
     public TextView kongtiao;
     View v;
+    ImageView fengxiang;
     MainActivity activity;
+    int mode = 0;//前下，前，下
     public ShushiFragment() {
         // Required empty public constructor
     }
@@ -95,7 +98,7 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
         fengxiangxia = (Button)v.findViewById(R.id.fengxiangxia);
         fengli=(TextView)v.findViewById(R.id.fengli);
         kongtiao = (TextView)v.findViewById(R.id.kongtiao);
-
+        fengxiang = (ImageView)v.findViewById(R.id.imageView2);
         kongtiaojia.setOnClickListener(this);
         kongtaiojian.setOnClickListener(this);
         fengliangjia.setOnClickListener(this);
@@ -171,9 +174,34 @@ public class ShushiFragment extends Fragment implements View.OnClickListener{
                 }
                 break;
             case R.id.fengxiangqian:
-
+                if(mode == 0){//前下
+                    fengxiang.setImageResource(R.drawable.fengxiangxia);
+                    mode = 2;
+                }else if(mode == 1){//前
+                    fengxiang.setImageResource(R.drawable.fengxiangnone);
+                    mode = -1;
+                }else if(mode == 2){//下
+                    fengxiang.setImageResource(R.drawable.fengxiangall);
+                    mode = 0;
+                }else if(mode == -1){//无
+                    fengxiang.setImageResource(R.drawable.fengxiangyou);
+                    mode = 1;
+                }
                 break;
             case R.id.fengxiangxia:
+                if(mode == 0){//前下
+                    fengxiang.setImageResource(R.drawable.fengxiangyou);
+                    mode = 1;
+                }else if(mode == 1){//前
+                    fengxiang.setImageResource(R.drawable.fengxiangall);
+                    mode = 0;
+                }else if(mode == 2){//下
+                    fengxiang.setImageResource(R.drawable.fengxiangnone);
+                    mode = -1;
+                }else if(mode == -1){//无
+                    fengxiang.setImageResource(R.drawable.fengxiangxia);
+                    mode = 2;
+                }
 
                 break;
         }

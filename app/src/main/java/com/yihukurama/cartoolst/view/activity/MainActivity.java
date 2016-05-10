@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements CallFragment.OnFr
             }
         });
 
-        bcs.startServer();
+//        bcs.startServer();
         connectTV.setBackground(CartoolApp.getInstace().getResources().getDrawable(R.drawable.dengdai));
     }
 

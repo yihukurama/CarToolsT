@@ -164,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView2"
-                    android:background="@drawable/fengxiangall"
+                    android:src="@drawable/fengxiangall"
                     android:layout_marginBottom="24px" />
 
                 <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
