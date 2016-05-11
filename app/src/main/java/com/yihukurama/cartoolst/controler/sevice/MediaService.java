@@ -161,7 +161,10 @@ public class MediaService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //获取当前播放位置
-        String cmd = intent.getStringExtra("cmd");
+        String cmd = "";
+        if(intent != null){
+            cmd = intent.getStringExtra("cmd");
+        }
         switch (cmd){
             case "next":
                     startNextMusic();

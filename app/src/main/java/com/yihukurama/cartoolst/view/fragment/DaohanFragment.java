@@ -148,7 +148,6 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
     private void initView(View view) {
         mapView = (MapView)view.findViewById(R.id.bmapView);
         mapView.showZoomControls(false);
-        mudidiView = (EditText)view.findViewById(R.id.dizhi);
         cjiaBtn = (Button)view.findViewById(R.id.cjia);
         cjiaBtn.setOnClickListener(this);
         cjianBtn = (Button)view.findViewById(R.id.cjian);
@@ -165,23 +164,6 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
         bianqianBtn5.setOnClickListener(this);
         dinweiBtn = (Button)view.findViewById(R.id.dinwei);
         dinweiBtn.setOnClickListener(this);
-
-        mudidiView.setOnClickListener(this);
-        mudidiView.setOnTouchListener(new View.OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                //记住EditText的InputType现在是password
-                int inType = mudidiView.getInputType(); // backup the input type
-                mudidiView.setInputType(InputType.TYPE_NULL); // disable soft input
-                mudidiView.onTouchEvent(event); // call native handler
-                mudidiView.setInputType(inType); // restore input type
-                mudidiView.setSelection(mudidiView.getText().length());
-                return true;
-
-            }
-        });
-
 
     }
 
@@ -231,7 +213,7 @@ public class DaohanFragment extends Fragment implements View.OnClickListener{
                 //播放视频
                 MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA4);
                 break;
-            case R.id.dizhi:
+            case R.id.bianqian5:
                 //播放视频
                 MediaManager.playDefault(context, ConstantValue.DAOHANMEDIA5);
                 break;
