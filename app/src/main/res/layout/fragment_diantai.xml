@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@drawable/mokuai">
 
         <LinearLayout
@@ -24,150 +24,84 @@
                 style="@style/P42A"
                 android:text="电台"
                 android:textSize="42px"/>
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="37px">
-                <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
-                    android:layout_width="248px"
-                    android:layout_height="181px"
-                    android:gravity="center_vertical"
-                    android:id="@+id/pro"
-                    android:text="90.0"
-                    style="@style/B150B"/>
-                <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
+                android:layout_height="wrap_content">
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FM"
-                    style="@style/B50B"/>
+                    android:layout_marginTop="79px"
+                    android:id="@+id/fm"
+                    android:background="@drawable/fm"/>
+
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shoucangselector"
                     android:id="@+id/shoucang"
-                    android:layout_marginLeft="77.8px"
-                    android:layout_marginTop="120px"/>
+                    android:layout_toRightOf="@+id/fm"
+                    android:layout_marginTop="145px"
+                    android:layout_marginLeft="80px"
+                    />
 
-                <LinearLayout
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="152px">
+
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20px"
-                    android:layout_marginLeft="230px"
-                    android:orientation="vertical">
-                    <SeekBar
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="611px"
-                        android:layout_height="123px"
-                        android:layout_marginLeft="1px"
-                        android:layout_marginRight="1px"
-                        android:background="@drawable/pinduan"
-                        android:progressDrawable="@null"
-                        android:thumb="@drawable/seekbar_thumb2"
-                        android:id="@+id/seekBar"
-                        android:layout_marginTop="35px"
-                        android:progress="50"/>
+                    android:background="@drawable/lastselector"
+                    android:id="@+id/last" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/play"
+                    android:background="@drawable/bofangselector" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pause"
+                    android:background="@drawable/pauseselector"
+                    android:visibility="gone"/>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="88"
-                            android:textColor="#2E4B47"
-                            android:textSize="48px"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/next"
+                    android:background="@drawable/nextselector"/>
 
-                        <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="89"
-                            android:layout_marginLeft="105px"
-                            android:textColor="#476661"
-                            android:textSize="48px"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/yinliangselector"
+                    android:id="@+id/yinliang"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="117.7px"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/soucangjiaselector"
+                    android:id="@+id/shoucangjia"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="58.7px"/>
 
-                        <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="90"
-                            android:layout_marginLeft="105px"
-                            android:textColor="#6E8D88"
-                            android:textSize="48px"/>
-
-                        <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="91"
-                            android:textColor="#476661"
-                            android:layout_marginLeft="105px"
-                            android:textSize="48px"/>
-                        <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="92"
-                            android:textColor="#2E4B47"
-                            android:layout_marginLeft="105px"
-                            android:textSize="48px"/>
-                    </LinearLayout>
-                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
 
 
-
-        <LinearLayout
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="70px"
-            android:layout_marginLeft="63px"
-            android:gravity="center">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/lastselector"
-                android:id="@+id/last" />
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/play"
-                android:background="@drawable/bofangselector" />
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/pause"
-                android:background="@drawable/pauseselector"
-                android:visibility="gone"/>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/next"
-                android:background="@drawable/nextselector"/>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/yinliangselector"
-                android:id="@+id/yinliang"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="117.7px"/>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/soucangjiaselector"
-                android:id="@+id/shoucangjia"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="58.7px"/>
-
-
-            </LinearLayout>
-
+            android:layout_marginLeft="183px"
+            android:background="@drawable/pinduan"
+            android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
 </FrameLayout>

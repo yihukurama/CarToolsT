@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="18px">
-                <com.yihukurama.cartoolst.view.widget.BebasNeueFontTextView
+                <com.yihukurama.cartoolst.view.widget.CentryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/datetime"
@@ -135,7 +135,7 @@
                     android:id="@+id/weektime"
                     android:layout_marginLeft="24px"
                     android:text="星期五"
-                    style="@style/P24a" />
+                    style="@style/P24a_2" />
 
             </LinearLayout>
             <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
-                <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
+                <com.yihukurama.cartoolst.view.widget.CentryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="26 "
@@ -170,13 +170,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="34px"
                 android:text="车内"
-                style="@style/P24a" />
+                style="@style/P24a_2" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
-                <com.yihukurama.cartoolst.view.widget.RPingFangFontTextView
+                <com.yihukurama.cartoolst.view.widget.CentryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/cheneiwendu"

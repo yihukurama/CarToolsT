@@ -7,8 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.yihukurama.cartoolst.R;
 
@@ -31,10 +29,8 @@ public class DiantaiFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private SeekBar seekBar;
     private View v;
     private OnFragmentInteractionListener mListener;
-    private TextView tx;
 
     public DiantaiFragment() {
         // Required empty public constructor
@@ -72,42 +68,6 @@ public class DiantaiFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_diantai, container, false);
-        tx = (TextView)v.findViewById(R.id.pro);
-        tx.setText("90");
-        seekBar = (SeekBar)v.findViewById(R.id.seekBar);
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            /**
-             * 拖动条停止拖动的时候调用
-             */
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                int temp = seekBar.getProgress();
-                float percent = (float)(Math.round(temp/100f*10))/10;
-                tx.setText(88+4*percent+"");
-            }
-            /**
-             * 拖动条开始拖动的时候调用
-             */
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                int temp = seekBar.getProgress();
-                float percent = (float)(Math.round(temp/100f*10))/10;
-                tx.setText(88+4*percent+"");
-            }
-            /**
-             * 拖动条进度改变的时候调用
-             */
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-                int temp = seekBar.getProgress();
-                float percent = (float)(Math.round(temp/100f*10))/10;
-                tx.setText(88+4*percent+"");
-            }
-        });
-
-
         return v;
     }
 

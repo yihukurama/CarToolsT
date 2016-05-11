@@ -1,8 +1,6 @@
 package com.yihukurama.cartoolst.view.widget;
 
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -31,5 +29,10 @@ public class CentryTextView extends TextView {
 
     private void initFont(){
         setTypeface(CartoolApp.getInstace().getTypefaceC());
+    }
+
+    @Override
+    public boolean isFocused() {
+        return true;
     }
 }
